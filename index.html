@@ -79,8 +79,14 @@
     }
     .is-opening .envelope-flap { transform: rotateX(-168deg); z-index: 1; }
 
-    /* The letter rides up out of the pocket, then takes over the screen. */
+    /* The letter rides up out of the pocket, then lifts onto the overlay.
+       position and z-index live here rather than in Tailwind utilities: the
+       utilities have the same specificity as .letter-expanding but are injected
+       by the CDN after this stylesheet, so they would win and leave the paper
+       stranded below the backdrop - blurred along with the page behind it. */
     .letter {
+      position: absolute;
+      z-index: 20;
       transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1) 0.8s;
       will-change: transform;
     }
@@ -207,8 +213,10 @@
 
         <!-- The letter, tucked inside. Slides up, then takes the screen. -->
         <!-- Centred with left/width, not a transform: the rise animation owns
-             the transform, and a Tailwind translate here would be overridden. -->
-        <div class="letter absolute left-[7%] bottom-3 w-[86%] z-20 linen-grain-overlay gold-filigree-border rounded-lg shadow-lg px-4 pt-3 pb-4" id="letter">
+             the transform, and a Tailwind translate here would be overridden.
+             position/z-index come from .letter, not utilities - see the note
+             on .letter in the stylesheet. -->
+        <div class="letter left-[7%] bottom-3 w-[86%] linen-grain-overlay gold-filigree-border rounded-lg shadow-lg px-4 pt-3 pb-4" id="letter">
           <div class="letter-peek">
             <div class="flex items-center justify-between gap-1 mb-1">
               <span class="font-label-sm text-[10px] text-tertiary uppercase tracking-widest font-semibold">Course I</span>
