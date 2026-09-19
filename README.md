@@ -60,8 +60,33 @@ assets/     tokens, shared config, drift check
 Reference/  the original pre-migration screens, kept as-is
 ```
 
+## Photographs
+
+Every image is a placeholder in `assets/img/`. Replace a file and the page picks it
+up — keep the same filename and nothing else needs editing. Any format works
+(`.jpg`, `.png`, `.webp`); the `.svg` extension in the filename is not required, but
+if you change it, update the matching `src=` in the page listed below.
+
+| File | Shape | Appears on |
+|---|---|---|
+| `logo.svg` | wide, transparent background | every page, top left |
+| `avatar.svg` | square, shown as a circle | every page except `index.html` |
+| `memory-1.svg` | square | `memories.html` — July 14, Golden Hour |
+| `memory-2.svg` | square | `memories.html` — August 29, Seaside Pier |
+| `memory-3.svg` | square | `memories.html` — November 18, Rainy Café |
+| `bistro.svg` | landscape | `trivia.html`, behind the question |
+| `dinner-table.svg` | landscape | `rsvp.html`, the table for two |
+
+The captions that go with the photos are plain text in the pages — search for
+"Golden Hour" in `memories.html` to change them.
+
+## Music
+
+`rsvp.html` plays a song in the background. Put the file in `assets/audio/` and edit
+the `MUSIC` block near the bottom of `rsvp.html`; see `assets/audio/README.md` for
+the details. With no file present the page still works — the button simply says so.
+
 ## Known limits
 
-- Photographs are hot-linked to Google's CDN and will break if those URLs expire.
-  Swap in local images under `assets/` before this needs to last.
-- The music control on `rsvp.html` toggles its icon only; there is no audio element yet.
+- Photographs ship as placeholders; the originals were hot-linked to Google's CDN
+  and are preserved only in `Reference/`.

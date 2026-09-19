@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="160" height="56" viewBox="0 0 160 56" role="img" aria-label="Logo placeholder">
+  <rect width="160" height="56" rx="12" fill="#FAF6EF"/>
+  <rect x="4" y="4" width="152" height="48" rx="8" fill="none"
+        stroke="#C9A24B" stroke-width="1.5" stroke-dasharray="7 5" opacity="0.8"/>
+  
+  <circle cx="80" cy="22" r="11" fill="none" stroke="#3A4A34" stroke-width="1.6" opacity="0.75"/>
+  <path d="M74 25l4 -5 3 4 3 -3 2 3z"
+        fill="#3A4A34" opacity="0.75"/>
+  <text x="80" y="47" text-anchor="middle"
+        font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="9"
+        font-weight="700" letter-spacing="1.6" fill="#3A4A34">LOGO</text>
+  <text x="80" y="50" text-anchor="middle"
+        font-family="'Plus Jakarta Sans', system-ui, sans-serif" font-size="7"
+        fill="#747870">wide, transparent PNG</text>
+  <rect x="4" y="4" width="152" height="48" rx="8" fill="none" stroke="#E3DDCB" stroke-width="1"/>
+</svg>
