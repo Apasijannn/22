@@ -352,6 +352,7 @@
     // read, closed and reopened as often as the guest likes.
     let opened = false;
     let expanded = false;
+    let navigating = false;
     let placeholder = null;
     let backdrop = null;
 
@@ -389,7 +390,9 @@
 
       backdrop = document.createElement('div');
       backdrop.className = 'letter-backdrop';
-      backdrop.addEventListener('click', collapseLetter);
+      backdrop.addEventListener('click', function () {
+        if (!navigating) collapseLetter();
+      });
       document.body.appendChild(backdrop);
 
       applyRect(from);
@@ -426,8 +429,9 @@
       applyRect(expandedRect());
     }
 
-    // Shrink back into the open envelope. Never navigates.
-    function collapseLetter() {
+    // Shrink back into the open envelope. Navigation is never implied here -
+    // the caller decides what happens once the paper has landed.
+    function collapseLetter(done) {
       if (!expanded) return;
       expanded = false;
 
@@ -446,7 +450,8 @@
         placeholder = null;
         backdrop.remove();
         backdrop = null;
-        envelopeBtn.focus({ preventScroll: true });
+        if (done) done();
+        else envelopeBtn.focus({ preventScroll: true });
       };
 
       if (reduceMotion) {
@@ -481,6 +486,7 @@
 
     // Once open, tapping the envelope again simply brings the paper back up.
     function onEnvelopeActivate() {
+      if (navigating) return;
       if (!opened) open();
       else if (!expanded) expandLetter();
     }
@@ -495,12 +501,12 @@
 
     closeBtn.addEventListener('click', function (e) {
       e.stopPropagation();
-      collapseLetter();
+      if (!navigating) collapseLetter();
     });
     letter.addEventListener('click', function (e) { e.stopPropagation(); });
 
     document.addEventListener('keydown', function (e) {
-      if (e.key === 'Escape') collapseLetter();
+      if (e.key === 'Escape' && !navigating) collapseLetter();
     });
 
     // Keep the paper centred if the phone is rotated while it is open.
@@ -508,8 +514,19 @@
       if (expanded) applyRect(expandedRect());
     });
 
+    // Continue folds the paper back into the envelope first, then leaves.
+    // The letter going home is the goodbye; the page change follows it.
     continueBtn.addEventListener('click', function () {
-      window.location.href = NEXT_SCREEN;
+      if (navigating) return;
+      navigating = true;
+      collapseLetter(function () {
+        if (reduceMotion) {
+          window.location.href = NEXT_SCREEN;
+          return;
+        }
+        // A beat to let the paper settle into the envelope before the screen goes.
+        setTimeout(function () { window.location.href = NEXT_SCREEN; }, 340);
+      });
     });
   })();
 </script>
