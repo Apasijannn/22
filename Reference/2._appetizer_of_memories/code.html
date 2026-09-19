@@ -1,0 +1,292 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><title>A Table Reserved For You</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script id="tailwind-config">tailwind.config = { darkMode: "class", theme: { extend: { colors: { "error": "#ba1a1a", "tertiary-fixed-dim": "#ffb59d", "surface-bright": "#f4fcec", "background": "#f4fcec", "surface-container-lowest": "#ffffff", "outline": "#747870", "on-secondary-fixed": "#1d1c14", "on-surface-variant": "#444841", "surface-container": "#e9f0e0", "primary-fixed-dim": "#b9ccaf", "primary-container": "#3a4a34", "on-secondary-fixed-variant": "#49473e", "secondary-container": "#e8e2d6", "on-primary-fixed": "#111f0d", "secondary-fixed-dim": "#cbc6bb", "on-tertiary-fixed-variant": "#75331c", "surface-container-highest": "#dde5d5", "on-surface": "#171d14", "outline-variant": "#c4c8be", "primary": "#24331f", "inverse-surface": "#2b3228", "on-tertiary-container": "#f99c7e", "inverse-on-surface": "#ecf3e3", "surface-container-high": "#e3ebdb", "tertiary-fixed": "#ffdbd0", "tertiary": "#571d07", "surface-variant": "#dde5d5", "on-background": "#171d14", "on-primary": "#ffffff", "on-primary-container": "#a7b99d", "secondary-fixed": "#e8e2d6", "on-primary-fixed-variant": "#3b4b35", "on-error-container": "#93000a", "on-tertiary": "#ffffff", "on-secondary": "#ffffff", "surface-container-low": "#eff6e6", "tertiary-container": "#74321b", "on-secondary-container": "#67645b", "on-error": "#ffffff", "surface-tint": "#52634b", "error-container": "#ffdad6", "secondary": "#615e55", "surface-dim": "#d5ddcd", "primary-fixed": "#d5e8ca", "surface": "#f4fcec", "on-tertiary-fixed": "#390c00", "inverse-primary": "#b9ccaf" }, borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" }, spacing: { "space-xl": "3.5rem", "space-md": "1.25rem", "margin-mobile": "1.25rem", "gutter": "1.5rem", "space-lg": "2.25rem", "margin": "3rem", "gutter-mobile": "1rem", "space-sm": "0.75rem", "space-xs": "0.375rem" }, fontFamily: { "headline-sm": ["Playfair Display"], "headline-lg-mobile": ["Playfair Display"], "label-sm": ["Plus Jakarta Sans"], "headline-lg": ["Playfair Display"], "body-sm": ["Plus Jakarta Sans"], "display-lg": ["Playfair Display"], "display-lg-mobile": ["Playfair Display"], "label-lg": ["Plus Jakarta Sans"], "headline-md": ["Playfair Display"], "body-md": ["Plus Jakarta Sans"], "label-md": ["Plus Jakarta Sans"], "body-lg": ["Plus Jakarta Sans"] }, fontSize: { "headline-sm": ["20px", { "lineHeight": "28px", "fontWeight": "600" }], "headline-lg-mobile": ["28px", { "lineHeight": "36px", "fontWeight": "400" }], "label-sm": ["10px", { "lineHeight": "14px", "letterSpacing": "0.16em", "fontWeight": "700" }], "headline-lg": ["36px", { "lineHeight": "44px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "body-sm": ["13px", { "lineHeight": "20px", "fontWeight": "400" }], "display-lg": ["56px", { "lineHeight": "64px", "letterSpacing": "-0.02em", "fontWeight": "400" }], "display-lg-mobile": ["38px", { "lineHeight": "46px", "letterSpacing": "-0.01em", "fontWeight": "400" }], "label-lg": ["14px", { "lineHeight": "20px", "letterSpacing": "0.06em", "fontWeight": "600" }], "headline-md": ["26px", { "lineHeight": "34px", "fontWeight": "400" }], "body-md": ["15px", { "lineHeight": "24px", "fontWeight": "400" }], "label-md": ["12px", { "lineHeight": "16px", "letterSpacing": "0.12em", "fontWeight": "600" }], "body-lg": ["18px", { "lineHeight": "28px", "fontWeight": "400" }] } } } };</script><style>
+@layer base {
+  html, body { width: 100vw; margin: 0; padding: 0; }
+  body { overscroll-behavior: none; }
+  .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); }
+  .pt-safe { padding-top: env(safe-area-inset-top, 0px); }
+  main > :first-child { margin-top: 0 !important; }
+  main > :last-child { margin-bottom: 0 !important; }
+}
+::-webkit-scrollbar { display: none; }
+
+@keyframes forwardEntrance {
+  0% {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes polaroidFloatReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+.animate-forward-entrance {
+  animation: forwardEntrance 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+.animate-polaroid-reveal {
+  animation: polaroidFloatReveal 0.85s cubic-bezier(0.2, 0.9, 0.3, 1) 0.15s both;
+}
+
+.polaroid-paper {
+  background-color: #fefefc;
+  background-image: radial-gradient(#ece7dc 0.75px, transparent 0.75px);
+  background-size: 10px 10px;
+  box-shadow: 0 16px 36px -8px rgba(36, 51, 31, 0.16), 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.forward-action-btn:hover .forward-icon,
+.forward-action-btn:focus-visible .forward-icon,
+.forward-action-btn:active .forward-icon {
+  transform: translateX(4px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-forward-entrance,
+  .animate-polaroid-reveal {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .forward-action-btn .forward-icon {
+    transform: none !important;
+    transition: none !important;
+  }
+  * {
+    transition-duration: 0.01ms !important;
+  }
+}
+</style></head><body class="bg-surface text-on-surface font-body-md text-body-md flex flex-col min-h-screen relative selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)] pt-safe"><div class="h-20 px-gutter-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="Botanika Tasting Menu Emblem" class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1WRNWS79_6ShexeZxLaFSAaULVkmWhvwHC0yNvt59yJcyJaN-0mZ4JGxtht2wgRJvaJnLF8lClWTN3GxmfY_-rHV5L565Ajx-CYpFOKODGNWYWvyS_Da1an5QNVavncVbu6WYgETo74rFMoJa23FHkJW1NFfI2QOSIvNGDexCmDLz0ttBlM4ueQV5QtpaoMRR5aReHlt-7Te-G1WYWkhC8Br1Usai9MBXieSH_9mvwSzGKjAD1jsLFN"><div class="flex flex-col truncate"><span class="font-label-sm text-label-sm uppercase text-secondary tracking-widest">Botanika</span><span class="font-headline-sm text-headline-sm text-primary tracking-tight truncate">Memories</span></div></div><div class="flex items-center gap-space-sm shrink-0"><div class="flex flex-col items-end pointer-events-none select-none"><span class="font-label-sm text-[10px] uppercase tracking-widest text-secondary font-semibold">2 of 5</span><div class="flex items-center gap-1.5 mt-1.5"><span class="w-1.5 h-1.5 rounded-full bg-primary/40"></span><span class="w-2 h-2 rounded-full bg-tertiary-container ring-2 ring-tertiary-container/30"></span><span class="w-1.5 h-1.5 rounded-full bg-outline-variant/60"></span><span class="w-1.5 h-1.5 rounded-full bg-outline-variant/60"></span><span class="w-1.5 h-1.5 rounded-full bg-outline-variant/60"></span></div></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_2px_6px_rgba(58,74,52,0.18)]" src="https://lh3.googleusercontent.com/aida/AEtjO1Vj0bKwG8sCEHjPyjB8_513JgOnu9vxqOW-BzsCx3g5jNaOp6ak0efA6J5CvrLr39YwcF8In7bFFWGLJPE_nZ4gZG-cGxirvY0MRog8zCMzazAES8e86zfiI0FR_IXTiRJt6dTPtZEdeDtZvFkxOl4lowtHEpJXqEiWKPhis1ZaxdKT1jCyyj2KPjOnGt0SXShbHzmjdVJaHEknZkvt7J6_pnVcKcdAyvksHD2ZuJWxXWlOy5eW9c91"></div></div></header><main class="flex-1 flex flex-col relative w-full px-gutter-mobile pt-20 bg-surface pb-8"><div class="animate-forward-entrance flex flex-col w-full max-w-md mx-auto relative px-2 py-4">
+<div class="text-center mt-2 mb-4">
+<h1 class="font-headline-lg-mobile text-[32px] leading-tight text-primary tracking-tight mb-1.5">
+    Amuse-Bouche of Memories
+  </h1>
+<p class="font-headline-sm text-base italic text-secondary font-normal">
+    Moments seasoned with love.
+  </p>
+<!-- Delicate Gold Botanical Vine Divider -->
+<div class="flex items-center justify-center gap-2.5 my-3.5 text-[#bfa15f]">
+<svg class="w-16 h-3 text-[#bfa15f]/70" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 70 12">
+<path d="M0 6 C20 6, 25 1, 35 6 C45 11, 50 6, 70 6" stroke-linecap="round"></path>
+<path d="M18 5.5 C16 3, 13 4, 15 6" stroke-linecap="round"></path>
+<path d="M52 6.5 C54 9, 57 8, 55 6" stroke-linecap="round"></path>
+</svg>
+<svg class="w-4 h-4 text-[#bfa15f]" fill="currentColor" viewBox="0 0 24 24">
+<path d="M12 2C12 2 13.5 7.5 17 9C13.5 10.5 12 16 12 16C12 16 10.5 10.5 7 9C10.5 7.5 12 2 12 2Z"></path>
+<circle cx="12" cy="19.5" r="1.5"></circle>
+</svg>
+<svg class="w-16 h-3 text-[#bfa15f]/70" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 70 12">
+<path d="M70 6 C50 6, 45 1, 35 6 C25 11, 20 6, 0 6" stroke-linecap="round"></path>
+<path d="M52 5.5 C54 3, 57 4, 55 6" stroke-linecap="round"></path>
+<path d="M18 6.5 C16 9, 13 8, 15 6" stroke-linecap="round"></path>
+</svg>
+</div>
+</div>
+<!-- Photo Stack Area with Botanical Line-Art Filigree -->
+<div class="animate-polaroid-reveal relative w-full h-[430px] mb-6 select-none flex items-center justify-center">
+<!-- Filigree Eucalyptus & Monstera Leaf Line Art Behind Stack -->
+<div class="absolute inset-0 pointer-events-none overflow-visible flex items-center justify-center z-0">
+<!-- Top Left Eucalyptus Sprig -->
+<svg class="absolute -top-6 -left-3 w-36 h-36 text-primary/25 drop-shadow-sm rotate-[-12deg]" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 120 120">
+<path d="M10 110 Q45 80 85 20" stroke-linecap="round"></path>
+<ellipse cx="32" cy="85" rx="10" ry="16" transform="rotate(-35 32 85)"></ellipse>
+<ellipse cx="48" cy="65" rx="11" ry="17" transform="rotate(40 48 65)"></ellipse>
+<ellipse cx="64" cy="46" rx="9" ry="14" transform="rotate(-30 64 46)"></ellipse>
+<ellipse cx="78" cy="30" rx="8" ry="12" transform="rotate(35 78 30)"></ellipse>
+<ellipse cx="88" cy="18" rx="6" ry="9" transform="rotate(-15 88 18)"></ellipse>
+</svg>
+<!-- Bottom Right Monstera & Botanical Fern Accent -->
+<svg class="absolute -bottom-8 -right-4 w-40 h-40 text-primary/25 drop-shadow-sm rotate-[10deg]" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 130 130">
+<path d="M20 120 C45 95 85 75 115 15" stroke-linecap="round"></path>
+<path d="M60 85 C42 80 32 65 38 48 C42 40 54 36 68 44 C82 52 86 70 78 82" stroke-linecap="round"></path>
+<path d="M48 62 C58 66 65 72 68 76"></path>
+<path d="M42 52 C52 58 59 63 62 67"></path>
+<ellipse cx="90" cy="50" rx="9" ry="15" transform="rotate(45 90 50)"></ellipse>
+<ellipse cx="104" cy="32" rx="7" ry="12" transform="rotate(-25 104 32)"></ellipse>
+<ellipse cx="112" cy="18" rx="5" ry="9" transform="rotate(30 112 18)"></ellipse>
+</svg>
+<!-- Delicate floating gold filigree leaf buds -->
+<svg class="absolute top-8 right-2 w-14 h-14 text-[#bfa15f]/60" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 50 50">
+<path d="M8 42 C18 30 30 20 42 8" stroke-linecap="round"></path>
+<circle cx="22" cy="26" fill="#bfa15f" fill-opacity="0.25" r="3"></circle>
+<circle cx="34" cy="14" fill="#bfa15f" fill-opacity="0.25" r="2.5"></circle>
+</svg>
+</div>
+<!-- Card 3 (Bottom Stack) -->
+<div class="polaroid-paper absolute w-[86%] transition-all duration-500 transform rotate-[-4deg] translate-y-4 scale-95 rounded-lg p-3 pb-4 cursor-pointer z-10" id="card-3">
+<div class="relative w-full aspect-square bg-surface-container-high rounded overflow-hidden mb-2.5">
+<img alt="Coffee moment" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAMRgN4PFEHLiNHydO-EpWJ1fYdEXd7VafgEFbGqIv1U9PyO68DC3gyEo9n3Bx59GOtH_sGyVE7yl9C0HKh8Mc4Iu1rEHKQAIQs0KYpaspG7F3KKrxqdo9kdw1L74B1ngrvmFuN_KZkOwz8oxTr-4iBtDaTfa7fceMd-QPMITCqYlRc1H0fp6R--upbfYUAfOoetNb6F5SlFZ5Mkb-CXTzU-T-Lf56ILxmjV3bzbZT1PlYKR5jLAwQ">
+<!-- Translucent Tape -->
+<div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-14 h-4 bg-amber-100/70 border-t border-b border-amber-200/50 backdrop-blur-sm shadow-sm rotate-[-2deg]"></div>
+</div>
+<div class="text-center pt-1 pb-1">
+<p class="font-headline-sm text-base text-primary/90 font-medium tracking-tight">
+        November 18 • Rainy Café
+      </p>
+</div>
+</div>
+<!-- Card 2 (Middle Stack) -->
+<div class="polaroid-paper absolute w-[86%] transition-all duration-500 transform rotate-[3deg] translate-y-2 scale-[0.98] rounded-lg p-3 pb-4 cursor-pointer z-20" id="card-2">
+<div class="relative w-full aspect-square bg-surface-container-high rounded overflow-hidden mb-2.5">
+<img alt="Coastal gelato memory" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD-TGLhIk_idnrjz490qQOgjycIhRKF9Z4phTDGdn90RAN-BVNYES7JKKOCdog0FwbklM076MSj_VDyvkWJhj22BZ-XVvzjKnOa3DB8GGJwR3nSwED3OkO7ttePhEFIp9XqvQrLxHyxGQlnx2F03pWXNfwLAvweiWFChde6nNHWElBLwliJG-HlouJdh2pNV-itLgSsPRN7Gvjhq5Yhr1TJvkPYeMTeNcuuRCROomaIB1wlbx4Uc4k">
+<!-- Translucent Tape -->
+<div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-14 h-4 bg-amber-100/70 border-t border-b border-amber-200/50 backdrop-blur-sm shadow-sm rotate-[1.5deg]"></div>
+</div>
+<div class="text-center pt-1 pb-1">
+<p class="font-headline-sm text-base text-primary/90 font-medium tracking-tight">
+        August 29 • Seaside Pier
+      </p>
+</div>
+</div>
+<!-- Card 1 (Top Active Polaroid) -->
+<div class="polaroid-paper absolute w-[86%] transition-all duration-500 transform rotate-[-1deg] translate-y-0 scale-100 rounded-lg p-3.5 pb-4 cursor-grab active:cursor-grabbing z-30" id="card-1">
+<div class="relative w-full aspect-square bg-surface-container-high rounded overflow-hidden mb-2.5">
+<img alt="Romantic birthday celebration rooftop portrait" class="w-full h-full object-cover" src="https://lh3.googleusercontent.com/aida/AEtjO1Vj0bKwG8sCEHjPyjB8_513JgOnu9vxqOW-BzsCx3g5jNaOp6ak0efA6J5CvrLr39YwcF8In7bFFWGLJPE_nZ4gZG-cGxirvY0MRog8zCMzazAES8e86zfiI0FR_IXTiRJt6dTPtZEdeDtZvFkxOl4lowtHEpJXqEiWKPhis1ZaxdKT1jCyyj2KPjOnGt0SXShbHzmjdVJaHEknZkvt7J6_pnVcKcdAyvksHD2ZuJWxXWlOy5eW9c91">
+<!-- Botanical corner filigree watermark on photo -->
+<div class="absolute bottom-2 right-2 pointer-events-none opacity-40">
+<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
+<path d="M3 21C8 20 13 16 16 11C19 6 21 3 21 3C21 3 18 5 13 8C8 11 4 16 3 21Z"></path>
+</svg>
+</div>
+<!-- Vintage Wax Seal Motif at top -->
+<div class="absolute -top-2 left-1/2 -translate-x-1/2 flex items-center justify-center">
+<div class="w-8 h-8 rounded-full bg-tertiary-container shadow-[0_2px_6px_rgba(116,50,27,0.45)] border border-tertiary/40 flex items-center justify-center rotate-[6deg]">
+<span class="material-symbols-outlined text-[16px] text-tertiary-fixed font-light">local_florist</span>
+</div>
+</div>
+</div>
+<!-- Simplified Polaroid Caption -->
+<div class="text-center pt-1 pb-0.5">
+<p class="font-headline-sm text-[17px] leading-snug text-primary font-medium tracking-tight">
+        July 14 • Golden Hour
+      </p>
+</div>
+</div>
+</div>
+<!-- Dots Navigation -->
+<div class="flex items-center justify-center gap-2 mb-4">
+<button aria-label="Previous card" class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary active:scale-95 transition-all" id="prev-btn">
+<span class="material-symbols-outlined text-[16px]">west</span>
+</button>
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high">
+<span class="w-2 h-2 rounded-full bg-tertiary-container transition-all" id="indicator-1"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant transition-all" id="indicator-2"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant transition-all" id="indicator-3"></span>
+</div>
+<button aria-label="Next card" class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary active:scale-95 transition-all" id="next-btn">
+<span class="material-symbols-outlined text-[16px]">east</span>
+</button>
+</div>
+<!-- Delicate Botanical Quote Line (Replacing bulky notes box) -->
+<div class="flex flex-col items-center text-center px-4 py-2 mb-4">
+<p class="font-headline-sm text-sm italic text-secondary/90 tracking-wide">
+    “Light citrus &amp; wild elderflower, served to awaken nostalgia.”
+  </p>
+<div class="flex items-center justify-center gap-2 mt-2">
+<span class="h-[1px] w-6 bg-outline-variant/60"></span>
+<span class="material-symbols-outlined text-[13px] text-[#bfa15f]">spa</span>
+<span class="h-[1px] w-6 bg-outline-variant/60"></span>
+</div>
+</div>
+<!-- Simplified Forward Action Button -->
+<div class="w-full pt-1">
+<a class="forward-action-btn w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-primary text-on-primary shadow-md hover:bg-primary-container active:scale-[0.99] transition-all duration-300" data-path="trivia" href="#">
+<span class="font-headline-sm text-lg tracking-wide text-on-primary font-normal">Next Course</span>
+<span class="material-symbols-outlined text-[18px] forward-icon transition-transform duration-300 ease-out">arrow_forward</span>
+</a>
+</div>
+</div>
+<script>
+  (function() {
+    let currentIndex = 0;
+    const cards = [
+      document.getElementById('card-1'),
+      document.getElementById('card-2'),
+      document.getElementById('card-3')
+    ];
+    const indicators = [
+      document.getElementById('indicator-1'),
+      document.getElementById('indicator-2'),
+      document.getElementById('indicator-3')
+    ];
+
+    const cardTransforms = [
+      { transform: 'rotate(-1deg) translateY(0px) scale(1)', zIndex: '30' },
+      { transform: 'rotate(3deg) translateY(8px) scale(0.98)', zIndex: '20' },
+      { transform: 'rotate(-4deg) translateY(16px) scale(0.95)', zIndex: '10' }
+    ];
+
+    function updateCards() {
+      cards.forEach((card, idx) => {
+        const offset = (idx - currentIndex + 3) % 3;
+        card.style.transform = cardTransforms[offset].transform;
+        card.style.zIndex = cardTransforms[offset].zIndex;
+      });
+
+      indicators.forEach((ind, idx) => {
+        if (idx === currentIndex) {
+          ind.className = 'w-2 h-2 rounded-full bg-tertiary-container transition-all';
+        } else {
+          ind.className = 'w-1.5 h-1.5 rounded-full bg-outline-variant transition-all';
+        }
+      });
+    }
+
+    const nextBtn = document.getElementById('next-btn');
+    const prevBtn = document.getElementById('prev-btn');
+
+    if (nextBtn) {
+      nextBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % 3;
+        updateCards();
+      });
+    }
+
+    if (prevBtn) {
+      prevBtn.addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + 3) % 3;
+        updateCards();
+      });
+    }
+
+    cards.forEach((c) => {
+      if (c) {
+        c.addEventListener('click', () => {
+          currentIndex = (currentIndex + 1) % 3;
+          updateCards();
+        });
+      }
+    });
+
+    let startX = 0;
+    const container = document.querySelector('.relative.h-\\[430px\\]');
+    if (container) {
+      container.addEventListener('touchstart', (e) => {
+        startX = e.changedTouches[0].screenX;
+      }, { passive: true });
+
+      container.addEventListener('touchend', (e) => {
+        const endX = e.changedTouches[0].screenX;
+        if (startX - endX > 40) {
+          currentIndex = (currentIndex + 1) % 3;
+          updateCards();
+        } else if (endX - startX > 40) {
+          currentIndex = (currentIndex - 1 + 3) % 3;
+          updateCards();
+        }
+      }, { passive: true });
+    }
+  })();
+</script></main></body></html>

@@ -1,0 +1,259 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><title>Botanika Restaurant - The Reveal</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><link href="assets/design-tokens.css" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script src="assets/tailwind.tokens.js"></script><style>
+@layer base {
+  html, body {
+    width: 100vw;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    overscroll-behavior: none;
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+  .pt-safe {
+    padding-top: env(safe-area-inset-top, 0px);
+  }
+  main > :first-child {
+    margin-top: 0 !important;
+  }
+  main > :last-child {
+    margin-bottom: 0 !important;
+  }
+}
+::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes forwardReveal {
+  from {
+    opacity: 0;
+    transform: translateY(18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes cardGlowPulse {
+  0%, 100% {
+    box-shadow: 0 4px 20px rgba(181, 137, 50, 0.22);
+  }
+  50% {
+    box-shadow: 0 6px 26px rgba(212, 175, 55, 0.42);
+  }
+}
+
+@keyframes forwardArrowNudge {
+  0%, 100% {
+    transform: translateX(0);
+  }
+  50% {
+    transform: translateX(4px);
+  }
+}
+
+.animate-forward-reveal {
+  animation: forwardReveal 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+.animate-scratch-glow {
+  animation: cardGlowPulse 3s ease-in-out infinite;
+}
+
+.animate-forward-arrow {
+  animation: forwardArrowNudge 1.8s ease-in-out infinite;
+}
+
+.linen-texture {
+  background-color: var(--color-paper);
+  background-image: radial-gradient(var(--primitive-color-linen-500) 0.65px, transparent 0.65px), radial-gradient(var(--primitive-color-linen-600) 0.65px, var(--color-paper) 0.65px);
+  background-size: 16px 16px;
+  background-position: 0 0, 8px 8px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-forward-reveal,
+  .animate-scratch-glow,
+  .animate-forward-arrow {
+    animation: none !important;
+    transform: none !important;
+    opacity: 1 !important;
+  }
+}
+</style></head><body class="bg-surface text-on-surface font-body-md text-body-md flex flex-col min-h-screen relative selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="fixed top-0 inset-x-0 z-50 bg-surface/90 backdrop-blur-xl border-b border-outline-variant/30 pt-safe"><div class="h-16 px-gutter-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="Botanika Emblem" class="h-8 w-auto object-contain shrink-0" src="https://lh3.googleusercontent.com/aida/AEtjO1WRNWS79_6ShexeZxLaFSAaULVkmWhvwHC0yNvt59yJcyJaN-0mZ4JGxtht2wgRJvaJnLF8lClWTN3GxmfY_-rHV5L565Ajx-CYpFOKODGNWYWvyS_Da1an5QNVavncVbu6WYgETo74rFMoJa23FHkJW1NFfI2QOSIvNGDexCmDLz0ttBlM4ueQV5QtpaoMRR5aReHlt-7Te-G1WYWkhC8Br1Usai9MBXieSH_9mvwSzGKjAD1jsLFN"><div class="flex flex-col truncate"><div class="flex items-center gap-2 select-none"><span class="font-label-sm text-[11px] font-semibold tracking-wider text-secondary">4 of 5</span><div class="flex items-center gap-1"><span class="w-1.5 h-1.5 rounded-full bg-primary/40"></span><span class="w-1.5 h-1.5 rounded-full bg-primary/40"></span><span class="w-1.5 h-1.5 rounded-full bg-primary/40"></span><span class="w-2 h-2 rounded-full bg-tertiary"></span><span class="w-1.5 h-1.5 rounded-full bg-outline-variant"></span></div></div><span class="font-headline-sm text-[17px] text-primary tracking-tight font-serif">The Reveal</span></div></div><div class="flex items-center gap-space-sm shrink-0"><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_2px_6px_rgba(58,74,52,0.18)] ring-1 ring-primary/20" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCz6jyQmucJ_In3QeEUp1IaS1QZamrId6NuIG87vq5y-pnF6vlp2CfqM2zD_47E6_c1ny1CewUANpSSEqOk9T_x4n4G17du7aiVxg9LHpyXztI6PKarXk-dJ8OM09tCt3Mu8R9dpbCeGJZgVf2ulCadX9Wff8DnyhiU05srdio2wGX_Gz7Z6yAgGS_7Hd0CvTtEj30Kbm-Gwa8Mr9Tc7jbHyu9kQ22yhSIXJj0z2BTXu3iqiQHAlR8"></div></div></header><main class="flex-1 flex flex-col relative w-full px-gutter-mobile pt-16 bg-surface pb-space-md overflow-hidden"><!-- Botanical Watercolor Wash Background Element --><div class="absolute inset-0 pointer-events-none opacity-40 overflow-hidden"><svg class="absolute -top-10 -right-20 w-80 h-80 text-primary-fixed/50" fill="currentColor" viewBox="0 0 200 200"><path d="M42.7,-64C54.8,-53.4,63.7,-40.7,70.5,-26.4C77.3,-12.1,82,3.8,78.9,18.8C75.8,33.8,64.9,47.9,51.8,58.8C38.7,69.7,23.4,77.4,6.9,78.3C-9.5,79.2,-27.1,73.3,-41.8,63.1C-56.5,52.9,-68.3,38.4,-73.9,21.8C-79.5,5.2,-78.9,-13.5,-71.4,-29C-63.9,-44.5,-49.5,-56.8,-34.7,-66.5C-19.9,-76.2,-4.7,-83.3,9.4,-82.1C23.5,-80.9,30.6,-74.6,42.7,-64Z" transform="translate(100 100)"></path></svg><svg class="absolute top-1/2 -left-28 w-72 h-72 text-surface-container-highest/60" fill="currentColor" viewBox="0 0 200 200"><path d="M48.2,-64.1C62.6,-56.2,74.5,-42.6,78.6,-27.1C82.7,-11.6,79,5.8,72.6,21.9C66.2,38,57.1,52.8,43.8,62.7C30.5,72.6,13,77.6,-3.6,78.4C-20.2,79.2,-37.2,75.8,-50.2,66.1C-63.2,56.4,-72.2,40.4,-76.8,23.3C-81.4,6.2,-81.6,-12,-74.6,-27.3C-67.6,-42.6,-53.4,-55,-38.2,-62.7C-23,-70.4,-6.8,-73.4,8.8,-72.6C24.4,-71.8,33.8,-72,48.2,-64.1Z" transform="translate(100 100)"></path></svg><svg class="absolute -bottom-12 -right-16 w-88 h-88 text-secondary-container/40" fill="currentColor" viewBox="0 0 200 200"><path d="M40.3,-58.5C51.6,-50.7,60,-38.6,65.6,-25.2C71.2,-11.8,74.1,2.9,71.2,16.8C68.3,30.7,59.6,43.8,47.8,53.2C36,62.6,21.1,68.3,5.6,69.5C-9.9,70.7,-26,67.4,-39.8,58.8C-53.6,50.2,-65.1,36.3,-70.8,20C-76.5,3.7,-76.4,-15,-69.1,-30.2C-61.8,-45.4,-47.3,-57.1,-32.4,-63.9C-17.5,-70.7,-2.2,-72.6,11.8,-69.8C25.8,-67,29,-56.3,40.3,-58.5Z" transform="translate(100 100)"></path></svg></div><div class="relative z-10 flex flex-col w-full max-w-[390px] mx-auto py-3 animate-forward-reveal"><!-- Main Bespoke Tasting Menu Card with Linen & Ornamental Double Filigree Frame --><div class="relative w-full rounded-2xl bg-surface-container-lowest shadow-[0_16px_40px_rgba(36,51,31,0.1),0_4px_12px_rgba(36,51,31,0.05)] p-2.5 linen-texture"><!-- Double-line Ornamental Filigree Border Frame --><div class="relative rounded-xl border border-[var(--color-foil)]/70 p-3 bg-white/75 backdrop-blur-[2px] shadow-[inset_0_0_0_2px_rgba(201,162,75,0.22)]"><!-- Bespoke Gold Filigree Corner Ornaments --><svg class="absolute top-1 left-1 w-6 h-6 text-[var(--color-foil-deep)] pointer-events-none" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><path d="M2 14V4C2 2.89543 2.89543 2 4 2H14"></path><path d="M6 10V6H10"></path><circle cx="5" cy="5" fill="var(--color-foil-deep)" r="1.5"></circle></svg><svg class="absolute top-1 right-1 w-6 h-6 text-[var(--color-foil-deep)] pointer-events-none" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><path d="M22 14V4C22 2.89543 21.1046 2 20 2H10"></path><path d="M18 10V6H14"></path><circle cx="19" cy="5" fill="var(--color-foil-deep)" r="1.5"></circle></svg><svg class="absolute bottom-1 left-1 w-6 h-6 text-[var(--color-foil-deep)] pointer-events-none" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><path d="M2 10V20C2 21.1046 2.89543 22 4 22H14"></path><path d="M6 14V18H10"></path><circle cx="5" cy="19" fill="var(--color-foil-deep)" r="1.5"></circle></svg><svg class="absolute bottom-1 right-1 w-6 h-6 text-[var(--color-foil-deep)] pointer-events-none" fill="none" stroke="currentColor" stroke-width="1.2" viewBox="0 0 24 24"><path d="M22 10V20C22 21.1046 21.1046 22 20 22H10"></path><path d="M18 14V18H14"></path><circle cx="19" cy="19" fill="var(--color-foil-deep)" r="1.5"></circle></svg><!-- Scratch-to-reveal Gold Foil Card --><div class="relative w-full mb-3 rounded-lg overflow-hidden animate-scratch-glow border border-[var(--color-foil-bright)]" id="scratch-canvas-container" style="min-h: 130px; height: 132px;"><canvas class="absolute inset-0 w-full h-full cursor-pointer touch-none z-20" height="132" id="scratch-canvas" width="330"></canvas><!-- Revealed Card Underneath --><div class="relative z-10 h-full flex flex-col items-center justify-between p-3 select-none text-center bg-gradient-to-br from-[var(--color-paper)] via-[var(--primitive-color-linen-300)] to-[var(--primitive-color-linen-300)]"><div class="flex items-center gap-1 text-[11px] font-semibold text-tertiary uppercase tracking-widest pt-0.5"><span class="material-symbols-outlined text-[13px]">lock_open</span> Secret Unlocked</div><div class="my-auto"><p class="font-headline-sm text-[18px] text-primary tracking-tight font-serif">The Celebration Awaits</p><p class="text-[12px] text-secondary font-body-sm">Crafted exclusively for this golden evening</p></div><div class="flex items-center justify-between w-full text-[10px] text-secondary/80 uppercase tracking-widest px-1"><span class="flex items-center gap-1">✦ Table Reserved</span><span class="material-symbols-outlined text-[14px] text-tertiary">sparkles</span></div></div></div><!-- Header / Title Section --><div class="flex flex-col items-center text-center pt-0.5 pb-1"><span class="text-[10px] uppercase font-bold tracking-[0.2em] text-secondary/90 mb-0.5">An Intimate Degustation</span><h1 class="font-serif text-[30px] leading-[34px] text-primary tracking-tight font-normal">Botanika Restaurant</h1><p class="font-serif italic text-[14px] text-[var(--color-outline)] tracking-wide mt-0.5">Surabaya • Table 07</p><!-- Botanical Floral Sprig Divider --><div class="flex items-center justify-center gap-2 my-2 w-4/5 text-[var(--color-foil-deep)] opacity-80"><svg class="w-16 h-2" fill="none" stroke="currentColor" stroke-width="0.75" viewBox="0 0 60 8"><path d="M0 4H50"></path><circle cx="52" cy="4" fill="currentColor" r="1.5"></circle></svg><span class="material-symbols-outlined text-[15px]">nature</span><svg class="w-16 h-2" fill="none" stroke="currentColor" stroke-width="0.75" viewBox="0 0 60 8"><path d="M60 4H10"></path><circle cx="8" cy="4" fill="currentColor" r="1.5"></circle></svg></div><div class="inline-block px-3 py-0.5 rounded-full bg-[var(--primitive-color-linen-300)]/70 border border-[var(--primitive-color-linen-500)] text-primary font-semibold text-[11px] uppercase tracking-wider mb-2">
+            Private Birthday Tasting Menu
+          </div></div><!-- Information Blocks (Trimmed & Punchy Single Lines) --><div class="flex flex-col gap-1.5 py-0.5"><div class="flex items-center justify-between px-3 py-2 rounded-lg bg-surface-container-low/75 border border-outline-variant/30"><div class="flex items-center gap-2.5 min-w-0"><span class="material-symbols-outlined text-[18px] text-[var(--color-foil-deep)] shrink-0">calendar_today</span><span class="text-[11px] uppercase tracking-wider font-semibold text-secondary">Date &amp; Time</span></div><span class="text-[13px] font-semibold text-primary truncate" id="event-date">—</span></div><!-- Subtle Vine Divider --><div class="flex items-center justify-center opacity-30 my-[-2px]"><span class="w-12 h-[1px] bg-[var(--color-foil-deep)]"></span><span class="text-[10px] text-[var(--color-foil-deep)] px-1">❦</span><span class="w-12 h-[1px] bg-[var(--color-foil-deep)]"></span></div><div class="flex items-center justify-between px-3 py-2 rounded-lg bg-surface-container-low/75 border border-outline-variant/30"><div class="flex items-center gap-2.5 min-w-0"><span class="material-symbols-outlined text-[18px] text-[var(--color-foil-deep)] shrink-0">deck</span><span class="text-[11px] uppercase tracking-wider font-semibold text-secondary">Table</span></div><span class="text-[13px] font-semibold text-primary truncate">The Greenhouse Pavilion</span></div><!-- Subtle Vine Divider --><div class="flex items-center justify-center opacity-30 my-[-2px]"><span class="w-12 h-[1px] bg-[var(--color-foil-deep)]"></span><span class="text-[10px] text-[var(--color-foil-deep)] px-1">❦</span><span class="w-12 h-[1px] bg-[var(--color-foil-deep)]"></span></div><div class="flex items-center justify-between px-3 py-2 rounded-lg bg-surface-container-low/75 border border-outline-variant/30"><div class="flex items-center gap-2.5 min-w-0"><span class="material-symbols-outlined text-[18px] text-[var(--color-foil-deep)] shrink-0">styler</span><span class="text-[11px] uppercase tracking-wider font-semibold text-secondary">Dress Code</span></div><span class="text-[13px] font-semibold text-primary truncate">Effortless Chic</span></div></div><!-- Chef's Recommendation Note (Single Evocative Line) --><div class="mt-2.5 p-3 rounded-lg bg-secondary-container/35 border border-[var(--primitive-color-linen-500)]/70 text-center"><p class="font-serif italic text-[14px] leading-snug text-primary">
+            “Wear your dazzling smile — that's the only dessert I need.”
+          </p><span class="block text-[10px] uppercase tracking-widest text-secondary mt-1 font-semibold">— Yours, Always</span></div><!-- Compact Countdown --><div class="mt-2 py-1.5 px-3 rounded-lg bg-[var(--color-paper-sunken)]/70 border border-outline-variant/30 flex items-center justify-between"><span class="text-[10px] uppercase font-bold tracking-wider text-secondary">Countdown</span><span class="font-serif text-[15px] font-semibold tracking-wider text-primary" id="countdown">—</span></div><!-- CTA Buttons / Links --><div class="mt-3 flex flex-col items-center gap-2.5"><button class="relative w-full flex items-center justify-center gap-2.5 py-3 px-4 rounded-xl bg-[var(--color-wax)] text-white font-semibold text-[13px] uppercase tracking-wider shadow-[0_4px_14px_rgba(94,38,18,0.3)] active:scale-[0.98] transition-transform overflow-hidden" id="calendar-btn" type="button"><!-- Decorative Wax-Seal Motif in Button --><span class="w-5 h-5 rounded-full bg-[var(--primitive-color-terracotta-600)] flex items-center justify-center border border-[var(--color-tertiary-fixed-dim)] shadow-inner shrink-0"><span class="material-symbols-outlined text-[13px] text-tertiary-fixed">eco</span></span><span>Add to Calendar</span></button><a class="group inline-flex items-center gap-1.5 text-primary font-semibold text-[12px] uppercase tracking-widest hover:text-tertiary transition-colors py-1" href="rsvp.html"><span>Proceed to RSVP</span><span class="material-symbols-outlined text-[15px] group-hover:translate-x-1 transition-transform animate-forward-arrow inline-block">arrow_forward</span></a></div></div></div></div><script>
+  // ---- the one place the evening's date is defined ----
+  // Edit this, and the printed date, the countdown and the calendar link all follow.
+  const EVENT_DATE = new Date('2026-10-28T19:30:00+07:00');
+  const EVENT_ENDS = new Date(EVENT_DATE.getTime() + 3 * 60 * 60 * 1000);
+
+  (function() {
+    const fmt = new Intl.DateTimeFormat('en-US', {
+      weekday: 'long', month: 'short', day: 'numeric',
+      hour: 'numeric', minute: '2-digit', hour12: true, timeZone: 'Asia/Jakarta'
+    }).formatToParts(EVENT_DATE);
+    const part = (t) => (fmt.find((p) => p.type === t) || {}).value || '';
+    const slot = document.getElementById('event-date');
+    if (slot) {
+      slot.textContent = `${part('weekday')}, ${part('month')} ${part('day')} • ` +
+        `${part('hour')}:${part('minute')} ${part('dayPeriod')}`;
+    }
+
+    const cd = document.getElementById('countdown');
+    function tick() {
+      if (!cd) return;
+      const ms = EVENT_DATE - Date.now();
+      if (ms <= 0) { cd.textContent = 'Tonight'; return; }
+      const d = Math.floor(ms / 86400000);
+      const h = Math.floor(ms / 3600000) % 24;
+      const m = Math.floor(ms / 60000) % 60;
+      const pad = (n) => String(n).padStart(2, '0');
+      cd.textContent = `${pad(d)}d : ${pad(h)}h : ${pad(m)}m`;
+    }
+    tick();
+    setInterval(tick, 30000);
+  })();
+
+  (function() {
+    const canvas = document.getElementById('scratch-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const css = getComputedStyle(document.documentElement);
+    const token = (n) => css.getPropertyValue(n).trim();
+
+    const container = document.getElementById('scratch-canvas-container');
+
+    function resize() {
+      const rect = container.getBoundingClientRect();
+      canvas.width = rect.width;
+      canvas.height = rect.height;
+      drawCover();
+    }
+
+    function drawCover() {
+      // Golden Foil Base Gradient
+      const grad = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+      grad.addColorStop(0, token('--foil-scratch-light'));
+      grad.addColorStop(0.3, token('--foil-scratch-highlight'));
+      grad.addColorStop(0.5, token('--foil-scratch-base'));
+      grad.addColorStop(0.7, token('--foil-scratch-light'));
+      grad.addColorStop(1, token('--foil-scratch-shade'));
+      ctx.fillStyle = grad;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      // Sparkling Foil Flakes / Stars
+      for (let i = 0; i < 70; i++) {
+        const x = (i * 47) % canvas.width;
+        const y = (i * 31) % canvas.height;
+        ctx.fillStyle = i % 2 === 0 ? 'rgba(255, 255, 255, 0.85)' : 'rgba(116, 50, 27, 0.25)';
+        ctx.beginPath();
+        ctx.arc(x, y, (i % 2) + 0.8, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Little Sparkling Stars
+      const starPoints = [
+        [32, 28], [canvas.width - 36, 26], [45, canvas.height - 24], 
+        [canvas.width - 42, canvas.height - 28], [canvas.width / 2 - 70, 32], [canvas.width / 2 + 70, 32]
+      ];
+      ctx.fillStyle = 'var(--color-surface-container-lowest)';
+      starPoints.forEach(([sx, sy]) => {
+        ctx.beginPath();
+        ctx.moveTo(sx, sy - 4);
+        ctx.lineTo(sx + 1, sy - 1);
+        ctx.lineTo(sx + 4, sy);
+        ctx.lineTo(sx + 1, sy + 1);
+        ctx.moveTo(sx, sy + 4);
+        ctx.lineTo(sx - 1, sy + 1);
+        ctx.lineTo(sx - 4, sy);
+        ctx.lineTo(sx - 1, sy - 1);
+        ctx.fill();
+      });
+
+      // Botanical Laurel Illustration Wreath in Center Top
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2 - 12;
+      ctx.strokeStyle = token('--foil-scratch-crest-ink');
+      ctx.lineWidth = 1;
+      ctx.beginPath();
+      ctx.arc(cx, cy, 26, Math.PI * 0.7, Math.PI * 2.3);
+      ctx.stroke();
+
+      // Laurel Leaves
+      for (let angle = 0.8 * Math.PI; angle <= 2.2 * Math.PI; angle += 0.3) {
+        const lx = cx + Math.cos(angle) * 26;
+        const ly = cy + Math.sin(angle) * 26;
+        ctx.fillStyle = token('--foil-scratch-crest-ink');
+        ctx.beginPath();
+        ctx.ellipse(lx, ly, 3.5, 1.8, angle, 0, Math.PI * 2);
+        ctx.fill();
+      }
+
+      // Center Foil Crest Text
+      ctx.save();
+      ctx.fillStyle = token('--color-wax-deep');
+      ctx.font = '700 11px "Plus Jakarta Sans"';
+      ctx.textAlign = 'center';
+      ctx.letterSpacing = '2px';
+      ctx.fillText('SCRATCH TO REVEAL SURPRISE', canvas.width / 2, canvas.height / 2 + 24);
+
+      ctx.font = '9px "Plus Jakarta Sans"';
+      ctx.fillStyle = token('--color-wax');
+      ctx.fillText('✦ GOLDEN FOIL KEEPSAKE ✦', canvas.width / 2, canvas.height / 2 + 38);
+      ctx.restore();
+
+      // Peek cutout effect
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.beginPath();
+      ctx.ellipse(canvas.width * 0.76, canvas.height * 0.62, 36, 24, 0.2, 0, Math.PI * 2);
+      ctx.fill();
+      ctx.globalCompositeOperation = 'source-over';
+    }
+
+    let isDrawing = false;
+
+    function scratch(e) {
+      if (!isDrawing) return;
+      const rect = canvas.getBoundingClientRect();
+      const clientX = e.touches ? e.touches[0].clientX : e.clientX;
+      const clientY = e.touches ? e.touches[0].clientY : e.clientY;
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+
+      ctx.globalCompositeOperation = 'destination-out';
+      ctx.beginPath();
+      ctx.arc(x, y, 22, 0, Math.PI * 2);
+      ctx.fill();
+    }
+
+    canvas.addEventListener('mousedown', (e) => { isDrawing = true; scratch(e); });
+    canvas.addEventListener('mousemove', scratch);
+    window.addEventListener('mouseup', () => { isDrawing = false; });
+
+    canvas.addEventListener('touchstart', (e) => { isDrawing = true; scratch(e); }, { passive: true });
+    canvas.addEventListener('touchmove', scratch, { passive: true });
+    window.addEventListener('touchend', () => { isDrawing = false; });
+
+    window.addEventListener('resize', resize);
+    setTimeout(resize, 60);
+
+    const calBtn = document.getElementById('calendar-btn');
+    if (calBtn) {
+      calBtn.addEventListener('click', () => {
+        const title = encodeURIComponent('Botanika Restaurant: Degustation');
+        const details = encodeURIComponent('The Greenhouse Pavilion • Table 07. Dress code: Effortless Chic.');
+        const location = encodeURIComponent('Botanika Restaurant, Surabaya');
+        const stamp = (d) => d.toISOString().replace(/[-:]|\.\d{3}/g, '');
+        const googleCalUrl = `https://calendar.google.com/calendar/render?action=TEMPLATE&text=${title}` +
+          `&dates=${stamp(EVENT_DATE)}/${stamp(EVENT_ENDS)}&details=${details}&location=${location}`;
+        window.open(googleCalUrl, '_blank');
+      });
+    }
+  })();
+</script></main></body></html>
