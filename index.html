@@ -86,6 +86,20 @@
     }
     .is-opening .letter { transform: translateY(-58%); }
 
+    /* The paper lifts onto an overlay layer. The envelope screen stays mounted
+       and visible underneath - it is dimmed by the backdrop, never hidden. */
+    .letter-backdrop {
+      position: fixed;
+      inset: 0;
+      z-index: 70;
+      background: rgba(23, 29, 20, 0.55);
+      backdrop-filter: blur(3px);
+      -webkit-backdrop-filter: blur(3px);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+    .letter-backdrop.is-visible { opacity: 1; }
+
     .letter-expanding {
       position: fixed;
       z-index: 80;
@@ -93,10 +107,23 @@
       transition: top 0.7s cubic-bezier(0.5, 0, 0.2, 1),
                   left 0.7s cubic-bezier(0.5, 0, 0.2, 1),
                   width 0.7s cubic-bezier(0.5, 0, 0.2, 1),
-                  height 0.7s cubic-bezier(0.5, 0, 0.2, 1),
-                  border-radius 0.7s ease;
+                  height 0.7s cubic-bezier(0.5, 0, 0.2, 1);
       transform: none !important;
       overflow: hidden;
+    }
+
+    /* Holds the paper's slot in the envelope so it can shrink back into it. */
+    .letter-placeholder { visibility: hidden; }
+
+    #letterClose {
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+    }
+    .letter-fullscreen #letterClose {
+      opacity: 1;
+      pointer-events: auto;
+      transition-delay: 0.3s;
     }
 
     .letter-body {
@@ -122,13 +149,7 @@
     #continueBtn:hover .btn-arrow-glide,
     #continueBtn:active .btn-arrow-glide { transform: translateX(4px); }
 
-    .stage-dismissed {
-      opacity: 0;
-      pointer-events: none;
-      transition: opacity 0.4s ease 0.25s;
-    }
-
-    /* Simplified path: no sequence, no growth - the letter is simply there. */
+    /* Simplified path: no sequence, no growth - the paper is simply there. */
     @media (prefers-reduced-motion: reduce) {
       .animate-forward-entrance,
       .envelope-idle,
@@ -142,10 +163,11 @@
       .envelope-flap,
       .letter,
       .letter-expanding,
+      .letter-backdrop,
       .letter-body,
       .letter-peek,
       #continueBtn,
-      .stage-dismissed,
+      #letterClose,
       #continueBtn .btn-arrow-glide {
         transition: none !important;
       }
@@ -184,7 +206,9 @@
         <div class="absolute inset-0 bg-gradient-to-b from-surface-container-high/90 via-surface-container to-surface-container-highest/80"></div>
 
         <!-- The letter, tucked inside. Slides up, then takes the screen. -->
-        <div class="letter absolute left-1/2 -translate-x-1/2 bottom-3 w-[86%] z-20 linen-grain-overlay gold-filigree-border rounded-lg shadow-lg px-4 pt-3 pb-4" id="letter">
+        <!-- Centred with left/width, not a transform: the rise animation owns
+             the transform, and a Tailwind translate here would be overridden. -->
+        <div class="letter absolute left-[7%] bottom-3 w-[86%] z-20 linen-grain-overlay gold-filigree-border rounded-lg shadow-lg px-4 pt-3 pb-4" id="letter">
           <div class="letter-peek">
             <div class="flex items-center justify-between gap-1 mb-1">
               <span class="font-label-sm text-[10px] text-tertiary uppercase tracking-widest font-semibold">Course I</span>
@@ -196,7 +220,12 @@
             <div class="w-full h-[1px] bg-[var(--color-foil)]/30 mt-1.5"></div>
           </div>
 
-          <!-- Revealed only once the letter fills the screen -->
+          <!-- Shrinks the paper back down. Does not navigate. -->
+          <button aria-label="Close the letter" class="absolute top-3 right-3 z-10 w-9 h-9 rounded-full bg-surface-container-high/80 border border-secondary-fixed-dim/40 text-secondary flex items-center justify-center active:scale-90 transition-transform" id="letterClose" type="button">
+            <span class="material-symbols-outlined text-[18px]">close</span>
+          </button>
+
+          <!-- Revealed only once the paper has grown -->
           <div class="letter-body absolute inset-0 overflow-y-auto px-space-md py-10 flex flex-col items-center justify-center text-center" id="letterBody">
             <span class="font-label-sm text-[10px] text-tertiary uppercase tracking-widest font-semibold">Course I</span>
             <h2 class="font-headline-lg-mobile text-[clamp(24px,7vw,32px)] leading-[1.25] text-primary tracking-tight mt-3 max-w-[300px]">
@@ -302,58 +331,83 @@
     const letter = document.getElementById('letter');
     const letterBody = document.getElementById('letterBody');
     const continueBtn = document.getElementById('continueBtn');
-    const header = document.getElementById('pageHeader');
-    const main = document.querySelector('main');
+    const closeBtn = document.getElementById('letterClose');
 
+    // The only navigation on this screen, and only from the Continue button.
     const NEXT_SCREEN = 'memories.html';
+    const MARGIN = 18;      // breathing room so the envelope shows around the paper
+    const MAX_HEIGHT = 680; // keeps the paper from stretching on tall screens
+
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-    // One-way: once it opens, it stays open.
+    // The envelope opens once and stays open. The paper on top of it may be
+    // read, closed and reopened as often as the guest likes.
     let opened = false;
+    let expanded = false;
+    let placeholder = null;
+    let backdrop = null;
 
-    function showContinue() {
-      continueBtn.classList.add('is-ready');
-      continueBtn.focus({ preventScroll: true });
+    function expandedRect() {
+      const w = Math.min(window.innerWidth - MARGIN * 2, 520);
+      const h = Math.min(window.innerHeight - MARGIN * 2, MAX_HEIGHT);
+      return {
+        top: Math.round((window.innerHeight - h) / 2),
+        left: Math.round((window.innerWidth - w) / 2),
+        width: Math.round(w),
+        height: Math.round(h)
+      };
     }
 
-    // Lift the letter out of the envelope and grow it from exactly where it
-    // sits to the full viewport, so it reads as one continuous object.
-    function expandLetter() {
-      const rect = letter.getBoundingClientRect();
+    function applyRect(r) {
+      letter.style.top = r.top + 'px';
+      letter.style.left = r.left + 'px';
+      letter.style.width = r.width + 'px';
+      letter.style.height = r.height + 'px';
+    }
 
-      letter.style.top = rect.top + 'px';
-      letter.style.left = rect.left + 'px';
-      letter.style.width = rect.width + 'px';
-      letter.style.height = rect.height + 'px';
+    // Lift the paper onto an overlay above the envelope screen. The screen
+    // itself is left mounted and interactive-blocked, not hidden or unloaded.
+    function expandLetter() {
+      if (expanded) return;
+      expanded = true;
+
+      const from = letter.getBoundingClientRect();
+
+      placeholder = document.createElement('div');
+      placeholder.className = 'letter-placeholder';
+      placeholder.style.width = from.width + 'px';
+      placeholder.style.height = from.height + 'px';
+      letter.parentNode.insertBefore(placeholder, letter);
+
+      backdrop = document.createElement('div');
+      backdrop.className = 'letter-backdrop';
+      backdrop.addEventListener('click', collapseLetter);
+      document.body.appendChild(backdrop);
+
+      applyRect(from);
       letter.classList.add('letter-expanding');
       document.body.appendChild(letter);
 
       letterBody.scrollTop = 0;
-      header.style.transition = reduceMotion ? 'none' : 'opacity 0.4s ease';
-      header.style.opacity = '0';
-      header.style.pointerEvents = 'none';
-      main.classList.add('stage-dismissed');
-      stage.setAttribute('aria-hidden', 'true');
       document.body.style.overflow = 'hidden';
+      stage.setAttribute('aria-hidden', 'true');
 
       const finish = () => {
         letter.classList.add('letter-fullscreen');
-        showContinue();
+        continueBtn.classList.add('is-ready');
+        continueBtn.focus({ preventScroll: true });
       };
 
       if (reduceMotion) {
-        letter.style.transition = 'none';
-        letter.style.top = '0px';
-        letter.style.left = '0px';
-        letter.style.width = '100%';
-        letter.style.height = '100%';
-        letter.style.borderRadius = '0';
+        backdrop.classList.add('is-visible');
+        applyRect(expandedRect());
         finish();
         return;
       }
 
-      // Commit the starting rect before animating to the full screen.
+      // Commit the starting rect before animating away from it.
       void letter.offsetWidth;
+      backdrop.classList.add('is-visible');
 
       letter.addEventListener('transitionend', function onEnd(e) {
         if (e.propertyName !== 'height') return;
@@ -361,38 +415,89 @@
         finish();
       });
 
-      letter.style.top = '0px';
-      letter.style.left = '0px';
-      letter.style.width = '100%';
-      letter.style.height = '100%';
-      letter.style.borderRadius = '0';
+      applyRect(expandedRect());
+    }
+
+    // Shrink back into the open envelope. Never navigates.
+    function collapseLetter() {
+      if (!expanded) return;
+      expanded = false;
+
+      letter.classList.remove('letter-fullscreen');
+      continueBtn.classList.remove('is-ready');
+      stage.removeAttribute('aria-hidden');
+      document.body.style.overflow = '';
+
+      const back = placeholder.getBoundingClientRect();
+
+      const restore = () => {
+        letter.classList.remove('letter-expanding');
+        letter.removeAttribute('style');
+        placeholder.parentNode.insertBefore(letter, placeholder);
+        placeholder.remove();
+        placeholder = null;
+        backdrop.remove();
+        backdrop = null;
+        envelopeBtn.focus({ preventScroll: true });
+      };
+
+      if (reduceMotion) {
+        restore();
+        return;
+      }
+
+      backdrop.classList.remove('is-visible');
+      letter.addEventListener('transitionend', function onEnd(e) {
+        if (e.propertyName !== 'height') return;
+        letter.removeEventListener('transitionend', onEnd);
+        restore();
+      });
+
+      applyRect(back);
     }
 
     function open() {
       if (opened) return;
       opened = true;
       envelopeBtn.setAttribute('aria-expanded', 'true');
-      envelopeBtn.setAttribute('aria-disabled', 'true');
-      envelopeBtn.removeAttribute('tabindex');
-      envelopeBtn.style.pointerEvents = 'none';
+
+      stage.classList.add('is-opening');
 
       if (reduceMotion) {
-        stage.classList.add('is-opening');
         expandLetter();
         return;
       }
-
-      // seal cracks -> flap swings -> letter rises -> letter takes the screen
-      stage.classList.add('is-opening');
+      // seal cracks -> flap swings -> paper rises -> paper grows on the overlay
       setTimeout(expandLetter, 1400);
     }
 
-    envelopeBtn.addEventListener('click', open);
+    // Once open, tapping the envelope again simply brings the paper back up.
+    function onEnvelopeActivate() {
+      if (!opened) open();
+      else if (!expanded) expandLetter();
+    }
+
+    envelopeBtn.addEventListener('click', onEnvelopeActivate);
     envelopeBtn.addEventListener('keydown', function (e) {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault();
-        open();
+        onEnvelopeActivate();
       }
+    });
+
+    closeBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      collapseLetter();
+    });
+    letter.addEventListener('click', function (e) { e.stopPropagation(); });
+
+    document.addEventListener('keydown', function (e) {
+      if (e.key === 'Escape') collapseLetter();
+    });
+
+    // Keep the paper centred if the phone is rotated while it is open.
+    window.addEventListener('resize', function () {
+      if (expanded) applyRect(expandedRect());
     });
 
     continueBtn.addEventListener('click', function () {
