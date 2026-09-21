@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # A Table Reserved For You
 
 A five-screen digital dinner invitation, themed as a tasting menu at Botanika, Surabaya.
@@ -91,6 +90,3 @@ the details. With no file present the page still works — the button simply say
 
 - Photographs ship as placeholders; the originals were hot-linked to Google's CDN
   and are preserved only in `Reference/`.
-=======
-# 22
->>>>>>> 3d956bc60a9a8509f02ccdfcd1c025755b0f10e5
