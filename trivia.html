@@ -4,12 +4,9 @@
       min-height: max(884px, 100dvh);
     }
 
-    /* Subtle linen texture simulation */
+    /* Clean ivory paper ground - solid, no texture */
     .bg-linen {
       background-color: var(--color-paper-raised);
-      background-image: radial-gradient(var(--primitive-color-linen-500) 0.75px, transparent 0.75px), radial-gradient(var(--primitive-color-linen-500) 0.75px, var(--color-paper-raised) 0.75px);
-      background-size: 20px 20px;
-      background-position: 0 0, 10px 10px;
     }
 
     /* Forward-only transition animations */
@@ -55,6 +52,50 @@
     .cta-arrow {
       transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
     }
+
+    @keyframes ctaGlow {
+      0%, 100% {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12);
+      }
+      50% {
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.12), 0 0 0 6px var(--color-tertiary-fixed);
+      }
+    }
+
+    .cta-active {
+      animation: ctaGlow 2.2s ease-in-out infinite;
+    }
+
+    @keyframes optionNudge {
+      0%, 100% {
+        transform: translateX(0);
+      }
+      20% {
+        transform: translateX(-5px);
+      }
+      40% {
+        transform: translateX(5px);
+      }
+      60% {
+        transform: translateX(-3px);
+      }
+      80% {
+        transform: translateX(3px);
+      }
+    }
+
+    .option-nudge {
+      animation: optionNudge 0.42s cubic-bezier(0.36, 0.07, 0.19, 0.97);
+      background-color: var(--color-tertiary-fixed) !important;
+      border-color: var(--color-romantic) !important;
+    }
+
+    .cta-locked {
+      opacity: 0.45;
+      cursor: not-allowed;
+      pointer-events: none;
+      box-shadow: none;
+    }
     .cta-btn:hover .cta-arrow,
     .cta-btn:active .cta-arrow {
       transform: translateX(4px);
@@ -74,9 +115,13 @@
         transition: none !important;
         transform: none !important;
       }
+      .cta-active,
+      .option-nudge {
+        animation: none !important;
+      }
     }
   </style>
-</head><body class="bg-surface text-on-surface font-body-md text-body-md flex flex-col min-h-screen relative selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)] pt-safe"><div class="h-20 px-gutter-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="Botanika Tasting Menu Emblem" class="h-8 w-auto object-contain shrink-0" src="assets/img/logo.svg"><div class="flex flex-col truncate"><span class="font-label-sm text-label-sm uppercase text-secondary tracking-widest">Course III • 3 of 5</span><h1 class="font-headline-sm text-headline-sm text-primary tracking-tight truncate">Trivia</h1></div></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover shrink-0 shadow-[0_2px_6px_rgba(58,74,52,0.18)]" src="assets/img/avatar.svg"></div></header><main class="flex-1 flex flex-col relative w-full px-gutter-mobile pt-20 pb-safe bg-surface"><div class="flex flex-col w-full pb-10 space-y-6 max-w-xl mx-auto">
+</head><body class="bg-surface text-on-surface font-body-md text-body-md flex flex-col min-h-screen relative selection:bg-secondary-fixed selection:text-on-secondary-fixed"><main class="flex-1 flex flex-col relative w-full px-gutter-mobile pt-[calc(28px+env(safe-area-inset-top))] pb-safe bg-surface"><div aria-hidden="true" class="relative z-10 flex justify-center shrink-0 pb-3 text-[var(--color-foil)]/70"><svg class="w-11 h-4" fill="none" stroke="currentColor" stroke-width="1" viewBox="0 0 44 16"><path d="M3 14 C12 14 19 9 24 2" stroke-linecap="round"></path><path d="M10 12 C9 8 12 6 15 7 C14 10 12 12 10 12Z" fill="currentColor" stroke="none"></path><path d="M18 8 C18 4 21 3 23 5 C22 7 20 8 18 8Z" fill="currentColor" stroke="none"></path><circle cx="27" cy="3" r="1.4" fill="currentColor" stroke="none"></circle></svg></div><div class="flex flex-col w-full pb-10 space-y-6 max-w-xl mx-auto">
 <!-- Milestone Card Shell with Linen Texture & Filigree Frame -->
 <div class="animate-forward-card bg-linen rounded-2xl p-5 sm:p-6 shadow-md relative overflow-hidden flex flex-col items-center text-center border border-[var(--color-paper-edge)]">
 <!-- Gold Filigree Corners (SVG Corner Accents) -->
@@ -106,119 +151,24 @@
 </svg>
 <!-- Inner Delicate Inset Gold Filigree Border -->
 <div class="w-full h-full border border-[var(--primitive-color-linen-500)]/60 rounded-xl p-3 sm:p-4 flex flex-col items-center space-y-4">
-<!-- Top Milestone Dots: Minimal non-interactive "3 of 5" -->
-<div class="flex items-center justify-center gap-2 pt-1 pointer-events-none select-none">
-<span class="w-2 h-2 rounded-full bg-primary/30"></span>
-<span class="w-2 h-2 rounded-full bg-primary/30"></span>
-<span class="w-2.5 h-2.5 rounded-full bg-[var(--color-foil)] ring-2 ring-[var(--primitive-color-linen-300)]"></span>
-<span class="w-2 h-2 rounded-full bg-secondary-fixed-dim/70"></span>
-<span class="w-2 h-2 rounded-full bg-secondary-fixed-dim/70"></span>
-<span class="ml-1.5 font-label-sm text-[11px] uppercase tracking-widest text-[var(--color-outline)]">3 of 5</span>
+<!-- Question Progress Dots -->
+<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high mt-1" id="step-dots">
+<span class="w-2 h-2 rounded-full bg-tertiary-container transition-all" id="indicator-1"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant transition-all" id="indicator-2"></span>
+<span class="w-1.5 h-1.5 rounded-full bg-outline-variant transition-all" id="indicator-3"></span>
 </div>
-<!-- Simplified Punchy Headline in Large Serif -->
-<div class="space-y-2 px-1 pt-1">
-<h2 class="font-display-lg text-2xl sm:text-[30px] sm:leading-[36px] text-primary tracking-tight font-normal italic">
-        "Where did life taste best together?"
-      </h2>
-<!-- Subtle Botanical Line Divider -->
-<div class="flex items-center justify-center gap-2 pt-0.5">
-<span class="h-[1px] w-10 bg-[var(--primitive-color-linen-500)]"></span>
-<!-- Small olive leaf glyph -->
-<svg class="w-3.5 h-3.5 text-[var(--color-foil)]" fill="currentColor" viewBox="0 0 24 24">
-<path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66l.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.75C7 7.25 5 8.5 4 10c2.5-.5 5.5-.5 8-1c-2 1-3.5 2.5-4 4.5c2.5-1 5.5-2.5 9-5.5z"></path>
-</svg>
-<span class="h-[1px] w-10 bg-[var(--primitive-color-linen-500)]"></span>
-</div>
-</div>
-<!-- Image Vignette Framed by Botanical Eucalyptus Sprigs -->
-<div class="w-full relative py-1">
-<!-- Top Left Eucalyptus Branch Line-Art -->
-<svg class="absolute -top-2.5 -left-2 w-10 h-10 text-primary/45 pointer-events-none z-10" fill="none" stroke="currentColor" stroke-width="1.3" viewBox="0 0 48 48">
-<path d="M6 6 Q20 18 36 22" stroke-linecap="round"></path>
-<path d="M12 11 Q10 4 17 7 Q18 13 12 11" fill="currentColor" fill-opacity="0.12"></path>
-<path d="M21 15 Q24 8 28 12 Q27 18 21 15" fill="currentColor" fill-opacity="0.12"></path>
-<path d="M29 20 Q36 17 37 23 Q32 25 29 20" fill="currentColor" fill-opacity="0.12"></path>
-</svg>
-<!-- Bottom Right Eucalyptus Branch Line-Art -->
-<svg class="absolute -bottom-2.5 -right-2 w-10 h-10 text-primary/45 pointer-events-none z-10 -scale-100" fill="none" stroke="currentColor" stroke-width="1.3" viewBox="0 0 48 48">
-<path d="M6 6 Q20 18 36 22" stroke-linecap="round"></path>
-<path d="M12 11 Q10 4 17 7 Q18 13 12 11" fill="currentColor" fill-opacity="0.12"></path>
-<path d="M21 15 Q24 8 28 12 Q27 18 21 15" fill="currentColor" fill-opacity="0.12"></path>
-<path d="M29 20 Q36 17 37 23 Q32 25 29 20" fill="currentColor" fill-opacity="0.12"></path>
-</svg>
-<!-- The Framed Bistro Image -->
-<div class="w-full rounded-xl overflow-hidden relative shadow-sm border border-[var(--primitive-color-linen-500)]/70 bg-surface-container">
-<img alt="Archived Memory Bistro" class="w-full h-36 object-cover" data-alt="A warm, intimate candlelit corner bistro at dusk with soft fairy lights strung along wrought iron railings, two wine glasses on a rustic wooden table, cozy romantic aesthetic in rich deep sage green, terracotta, and warm ivory tones." src="assets/img/bistro.svg">
-<div class="absolute inset-0 bg-gradient-to-t from-primary/70 via-transparent to-transparent flex items-end p-2.5">
-<span class="font-label-sm text-label-sm text-surface-container-lowest tracking-wider uppercase flex items-center gap-1 opacity-95">
-<span class="material-symbols-outlined text-[13px]">photo_camera</span>
-            Bistro Memory • Autumn 2022
-          </span>
-</div>
-</div>
-</div>
-<!-- Concise Multiple-Choice Options with Botanical Leaf Sprig Indicators -->
-<div class="w-full flex flex-col gap-2.5 text-left pt-1" id="quiz-container">
-<!-- Option A: Selected State -->
-<button class="stagger-1 group w-full p-3.5 rounded-xl bg-primary text-on-primary shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-3 relative overflow-hidden text-left cursor-pointer border border-[var(--primitive-color-sage-600)]" onclick="selectAnswer(this, true)" type="button">
-<!-- Gold Checked Sprig Motif -->
-<div class="w-8 h-8 rounded-full bg-surface-container-lowest/15 flex items-center justify-center shrink-0 border border-[var(--color-foil)]/60 text-[var(--color-tertiary-fixed)]">
-<svg class="w-4 h-4 text-[var(--color-tertiary-fixed-dim)]" fill="currentColor" viewBox="0 0 24 24">
-<path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path>
-</svg>
-</div>
-<div class="flex flex-col min-w-0 flex-1">
-<span class="font-label-sm text-[10px] tracking-wider uppercase text-primary-fixed-dim">Option A</span>
-<span class="font-body-md text-sm sm:text-body-md font-medium text-on-primary">
-            The corner café under the fairy lights
-          </span>
-</div>
-<svg class="w-4 h-4 text-[var(--color-tertiary-fixed-dim)]/50 shrink-0" fill="currentColor" viewBox="0 0 24 24">
-<path d="M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66l.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.75C7 7.25 5 8.5 4 10c2.5-.5 5.5-.5 8-1c-2 1-3.5 2.5-4 4.5c2.5-1 5.5-2.5 9-5.5z"></path>
-</svg>
-</button>
-<!-- Option B -->
-<button class="stagger-2 group w-full p-3.5 rounded-xl bg-[var(--color-paper-sunken)] text-on-surface hover:bg-[var(--primitive-color-linen-300)] transition-all duration-200 flex items-center gap-3 text-left cursor-pointer shadow-sm border border-[var(--color-paper-edge)]" onclick="selectAnswer(this, false)" type="button">
-<!-- Olive Branch Motif -->
-<div class="w-8 h-8 rounded-full bg-[var(--color-paper-edge)] flex items-center justify-center shrink-0 text-secondary border border-[var(--primitive-color-linen-500)]">
-<svg class="w-4 h-4 text-[var(--color-secondary)]" fill="currentColor" viewBox="0 0 24 24">
-<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14.5v-9l6 4.5-6 4.5z" opacity="0"></path>
-<circle cx="12" cy="12" r="3.5"></circle>
-</svg>
-</div>
-<div class="flex flex-col min-w-0 flex-1">
-<span class="font-label-sm text-[10px] tracking-wider uppercase text-secondary">Option B</span>
-<span class="font-body-md text-sm sm:text-body-md text-on-surface">
-            The night market with matcha crepes
-          </span>
-</div>
-</button>
-<!-- Option C -->
-<button class="stagger-3 group w-full p-3.5 rounded-xl bg-[var(--color-paper-sunken)] text-on-surface hover:bg-[var(--primitive-color-linen-300)] transition-all duration-200 flex items-center gap-3 text-left cursor-pointer shadow-sm border border-[var(--color-paper-edge)]" onclick="selectAnswer(this, false)" type="button">
-<!-- Olive Branch Motif -->
-<div class="w-8 h-8 rounded-full bg-[var(--color-paper-edge)] flex items-center justify-center shrink-0 text-secondary border border-[var(--primitive-color-linen-500)]">
-<svg class="w-4 h-4 text-[var(--color-secondary)]" fill="currentColor" viewBox="0 0 24 24">
-<circle cx="12" cy="12" r="3.5"></circle>
-</svg>
-</div>
-<div class="flex flex-col min-w-0 flex-1">
-<span class="font-label-sm text-[10px] tracking-wider uppercase text-secondary">Option C</span>
-<span class="font-body-md text-sm sm:text-body-md text-on-surface">
-            Every moment you hold my hand
-          </span>
-</div>
-</button>
-</div>
-<!-- Chef's Tasting Note: Single Short Romantic Line -->
-<div class="stagger-note w-full bg-[var(--color-paper-sunken)]/80 rounded-xl p-3 flex items-center gap-2.5 text-left border border-[var(--color-paper-edge)] shadow-sm" id="chef-note">
+<!-- Question Headline + Options (re-rendered per question) -->
+<div class="w-full flex flex-col items-center space-y-4" id="question-stage"></div>
+<!-- Teasing Reaction Line -->
+<div class="stagger-note w-full bg-[var(--color-paper-sunken)]/80 rounded-xl p-3 items-center gap-2.5 text-left border border-[var(--color-paper-edge)] shadow-sm hidden" id="reaction-note">
 <span class="material-symbols-outlined text-tertiary-container shrink-0 text-[18px]">favorite</span>
-<p class="font-body-sm text-xs sm:text-body-sm text-tertiary font-medium italic">
-        "You always remember the magic."
-      </p>
+<p class="font-body-sm text-xs sm:text-body-sm text-tertiary font-medium italic" id="reaction-text"></p>
 </div>
-<!-- Short Action Button (2-4 words max) -->
-<button class="cta-btn w-full py-3.5 px-6 rounded-xl bg-tertiary-container text-on-primary hover:bg-tertiary shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer group" type="button">
-<span class="font-label-lg text-label-lg tracking-wide font-semibold">Unlock The Reveal</span>
+<!-- Retry Hint (visible until the right guess lands) -->
+<p class="font-body-sm text-xs sm:text-body-sm text-secondary/80 italic text-center" id="retry-hint">Guess again to continue 👀</p>
+<!-- Progress / Final CTA -->
+<button class="cta-btn cta-locked w-full py-3.5 px-6 rounded-xl bg-tertiary-container text-on-primary hover:bg-tertiary shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2 cursor-pointer group" disabled id="cta-btn" type="button">
+<span class="font-label-lg text-label-lg tracking-wide font-semibold" id="cta-label">Next Question</span>
 <span class="material-symbols-outlined cta-arrow text-[18px]">arrow_forward</span>
 </button>
 </div>
@@ -227,40 +177,217 @@
 <div class="flex items-center justify-center gap-2 text-secondary px-4 text-center">
 <span class="material-symbols-outlined text-[15px] text-[var(--color-foil)]">lock_open</span>
 <span class="font-body-sm text-xs sm:text-body-sm">
-    Each answered question unlocks another dish in your culinary storybook.
+    Every guess brings you one step closer to finding out.
   </span>
 </div>
 </div>
 <script>
-  document.querySelector('.cta-btn').addEventListener('click', function() {
-    window.location.href = 'reveal.html';
-  });
+  var QUESTIONS = [
+    {
+      text: '"What kind of place do you think I\'m taking you tonight?"',
+      options: [
+        {
+          text: 'Somewhere with many plants \uD83C\uDF3F',
+          correct: true,
+          reaction: 'Hmm... you might be onto something \uD83D\uDC40'
+        },
+        {
+          text: 'A drive-thru, obviously (romantic era)',
+          reaction: 'Wow. Setting the bar real low for me huh \uD83D\uDE02'
+        },
+        {
+          text: 'My kitchen, I\'m "cooking" tonight',
+          reaction: 'We both know that\'s not happening, nice try \uD83D\uDE0F'
+        },
+        {
+          text: 'Somewhere I\'ve been planning for weeks',
+          reaction: 'Okay detective, getting warmer... maybe \uD83D\uDC40'
+        }
+      ]
+    },
+    {
+      text: '"If tonight\'s dinner had a flavor, what would it be?"',
+      options: [
+        {
+          text: 'Classy, and the menu already has me drooling',
+          correct: true,
+          reaction: 'Hmm... you might be onto something \uD83D\uDC40'
+        },
+        {
+          text: 'Comfort food, no fork needed',
+          reaction: 'Cute guess, but I think you can do better \uD83D\uDE04'
+        },
+        {
+          text: 'Something with a wine list longer than our group chat',
+          reaction: 'Ha, close but not quite the vibe \uD83C\uDF77'
+        },
+        {
+          text: 'Instant noodles, elevated (trust the process)',
+          reaction: 'Absolutely not, but I respect the confidence \uD83D\uDE2D'
+        }
+      ]
+    },
+    {
+      text: '"How should you dress tonight?"',
+      options: [
+        {
+          text: 'Casual, we\'re just vibing',
+          reaction: 'Eh, maybe dress up just a little more than that \uD83D\uDC40'
+        },
+        {
+          text: 'Earthy and cozy, comfortable but cute',
+          correct: true,
+          reaction: 'Hmm... you might be onto something \uD83D\uDC40'
+        },
+        {
+          text: 'Full glam, main character energy',
+          reaction: 'We\'re not THAT extra, but I like the energy \uD83D\uDE02'
+        },
+        {
+          text: 'Pajamas, we\'re staying in (jk... or am I)',
+          reaction: 'Okay now you\'re just testing me \uD83D\uDE0F'
+        }
+      ]
+    }
+  ];
 
-  function selectAnswer(button, isCorrect) {
-    const container = document.getElementById('quiz-container');
-    const buttons = container.querySelectorAll('button');
-    const note = document.getElementById('chef-note');
+  var LETTERS = ['A', 'B', 'C', 'D'];
+  var STAGGER = ['stagger-1', 'stagger-2', 'stagger-3', 'stagger-note'];
 
-    buttons.forEach(btn => {
-      btn.className = "group w-full p-3.5 rounded-xl bg-[var(--color-paper-sunken)] text-on-surface hover:bg-[var(--primitive-color-linen-300)] transition-all duration-200 flex items-center gap-3 text-left cursor-pointer shadow-sm border border-[var(--color-paper-edge)]";
-      const iconWrap = btn.querySelector('div:first-child');
-      if (iconWrap) {
-        iconWrap.className = "w-8 h-8 rounded-full bg-[var(--color-paper-edge)] flex items-center justify-center shrink-0 text-secondary border border-[var(--primitive-color-linen-500)]";
-        iconWrap.innerHTML = '<svg class="w-4 h-4 text-[var(--color-secondary)]" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle></svg>';
-      }
-    });
+  var IDLE_BTN = 'group w-full p-3.5 rounded-xl bg-[var(--color-paper-sunken)] text-on-surface hover:bg-[var(--primitive-color-linen-300)] transition-all duration-200 flex items-center gap-3 text-left cursor-pointer shadow-sm border border-[var(--color-paper-edge)]';
+  var PICKED_BTN = 'group w-full p-3.5 rounded-xl bg-primary text-on-primary shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-3 relative overflow-hidden text-left cursor-pointer border border-[var(--primitive-color-sage-600)]';
+  var IDLE_ICON = 'w-8 h-8 rounded-full bg-[var(--color-paper-edge)] flex items-center justify-center shrink-0 text-secondary border border-[var(--primitive-color-linen-500)]';
+  var PICKED_ICON = 'w-8 h-8 rounded-full bg-surface-container-lowest/15 flex items-center justify-center shrink-0 border border-[var(--color-foil)]/60 text-[var(--color-tertiary-fixed)]';
+  var IDLE_LABEL = 'font-label-sm text-[10px] tracking-wider uppercase text-secondary';
+  var PICKED_LABEL = 'font-label-sm text-[10px] tracking-wider uppercase text-primary-fixed-dim';
+  var IDLE_TEXT = 'font-body-md text-sm sm:text-body-md text-on-surface';
+  var PICKED_TEXT = 'font-body-md text-sm sm:text-body-md font-medium text-on-primary';
+  var DOT_SVG = '<svg class="w-4 h-4 text-[var(--color-secondary)]" fill="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3.5"></circle></svg>';
+  var CHECK_SVG = '<svg class="w-4 h-4 text-[var(--color-tertiary-fixed-dim)]" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path></svg>';
+  var DIVIDER = "<div class=\"flex items-center justify-center gap-2 pt-0.5\">\n<span class=\"h-[1px] w-10 bg-[var(--primitive-color-linen-500)]\"></span>\n<svg class=\"w-3.5 h-3.5 text-[var(--color-foil)]\" fill=\"currentColor\" viewBox=\"0 0 24 24\">\n<path d=\"M17 8C8 10 5.9 16.17 3.82 21.34l1.89.66l.95-2.3c.48.17.98.3 1.34.3C19 20 22 3 22 3c-1 2-8 2.25-13 3.75C7 7.25 5 8.5 4 10c2.5-.5 5.5-.5 8-1c-2 1-3.5 2.5-4 4.5c2.5-1 5.5-2.5 9-5.5z\"></path>\n</svg>\n<span class=\"h-[1px] w-10 bg-[var(--primitive-color-linen-500)]\"></span>\n</div>";
 
-    if (isCorrect) {
-      button.className = "group w-full p-3.5 rounded-xl bg-primary text-on-primary shadow-sm hover:shadow-md transition-all duration-200 flex items-center gap-3 relative overflow-hidden text-left cursor-pointer border border-[var(--primitive-color-sage-600)]";
-      const iconWrap = button.querySelector('div:first-child');
-      if (iconWrap) {
-        iconWrap.className = "w-8 h-8 rounded-full bg-surface-container-lowest/15 flex items-center justify-center shrink-0 border border-[var(--color-foil)]/60 text-[var(--color-tertiary-fixed)]";
-        iconWrap.innerHTML = '<svg class="w-4 h-4 text-[var(--color-tertiary-fixed-dim)]" fill="currentColor" viewBox="0 0 24 24"><path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"></path></svg>';
-      }
-      if (note) note.classList.remove('hidden');
-    } else {
-      button.className = "group w-full p-3.5 rounded-xl bg-tertiary-fixed/30 text-on-surface transition-all duration-200 flex items-center gap-3 text-left cursor-pointer shadow-sm border border-[var(--color-romantic)]";
+  var stage = document.getElementById('question-stage');
+  var note = document.getElementById('reaction-note');
+  var noteText = document.getElementById('reaction-text');
+  var cta = document.getElementById('cta-btn');
+  var ctaLabel = document.getElementById('cta-label');
+  var hint = document.getElementById('retry-hint');
+
+  var current = 0;
+  var solved = false;
+  var nudgeTimer = null;
+
+  function escapeHtml(str) {
+    return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+  }
+
+  function setDots(index) {
+    for (var i = 0; i < QUESTIONS.length; i++) {
+      document.getElementById('indicator-' + (i + 1)).className = i === index
+        ? 'w-2 h-2 rounded-full bg-tertiary-container transition-all'
+        : 'w-1.5 h-1.5 rounded-full bg-outline-variant transition-all';
     }
   }
-</script></main>
+
+  function lockCta() {
+    solved = false;
+    cta.disabled = true;
+    cta.classList.add('cta-locked');
+    cta.classList.remove('cta-active');
+    ctaLabel.textContent = current === QUESTIONS.length - 1 ? 'Unlock The Reveal' : 'Next Question';
+    hint.classList.remove('hidden');
+  }
+
+  function unlockCta() {
+    solved = true;
+    cta.disabled = false;
+    cta.classList.remove('cta-locked');
+    cta.classList.add('cta-active');
+    hint.classList.add('hidden');
+  }
+
+  function nudge(button) {
+    if (nudgeTimer) clearTimeout(nudgeTimer);
+    button.classList.remove('option-nudge');
+    void button.offsetWidth; // restart the animation on a repeat pick
+    button.classList.add('option-nudge');
+    nudgeTimer = setTimeout(function() {
+      button.classList.remove('option-nudge');
+      nudgeTimer = null;
+    }, 700);
+  }
+
+  function render() {
+    var q = QUESTIONS[current];
+    var html = '<div class="space-y-2 px-1 pt-1 stagger-1">'
+      + '<h1 class="font-display-lg text-2xl sm:text-[30px] sm:leading-[36px] text-primary tracking-tight font-normal italic">'
+      + escapeHtml(q.text) + '</h1>' + DIVIDER + '</div>'
+      + '<div class="w-full flex flex-col gap-2.5 text-left pt-1" id="quiz-container">';
+
+    for (var i = 0; i < q.options.length; i++) {
+      html += '<button class="' + STAGGER[i] + ' ' + IDLE_BTN + '" data-index="' + i + '" type="button">'
+        + '<div class="' + IDLE_ICON + '">' + DOT_SVG + '</div>'
+        + '<div class="flex flex-col min-w-0 flex-1">'
+        + '<span class="' + IDLE_LABEL + '">Option ' + LETTERS[i] + '</span>'
+        + '<span class="' + IDLE_TEXT + '">' + escapeHtml(q.options[i].text) + '</span>'
+        + '</div></button>';
+    }
+    html += '</div>';
+    stage.innerHTML = html;
+
+    var buttons = stage.querySelectorAll('#quiz-container button');
+    for (var b = 0; b < buttons.length; b++) {
+      buttons[b].addEventListener('click', onPick);
+    }
+
+    note.classList.add('hidden');
+    note.classList.remove('flex');
+    setDots(current);
+    lockCta();
+  }
+
+  function paint(button, isPicked) {
+    button.className = isPicked ? PICKED_BTN : IDLE_BTN;
+    var wrap = button.querySelector('div:first-child');
+    wrap.className = isPicked ? PICKED_ICON : IDLE_ICON;
+    wrap.innerHTML = isPicked ? CHECK_SVG : DOT_SVG;
+    var spans = button.querySelectorAll('div:last-child > span');
+    spans[0].className = isPicked ? PICKED_LABEL : IDLE_LABEL;
+    spans[1].className = isPicked ? PICKED_TEXT : IDLE_TEXT;
+  }
+
+  function onPick(event) {
+    var picked = event.currentTarget;
+    var option = QUESTIONS[current].options[Number(picked.getAttribute('data-index'))];
+
+    noteText.textContent = option.reaction;
+    note.classList.remove('hidden');
+    note.classList.add('flex');
+
+    if (option.correct) {
+      var buttons = stage.querySelectorAll('#quiz-container button');
+      for (var i = 0; i < buttons.length; i++) {
+        paint(buttons[i], buttons[i] === picked);
+      }
+      unlockCta();
+      return;
+    }
+
+    // Wrong guess: playful nudge, reaction still shows, progression stays gated.
+    // A question already solved keeps its unlock and its highlighted option.
+    nudge(picked);
+  }
+
+  cta.addEventListener('click', function() {
+    if (!solved) return;
+    if (current < QUESTIONS.length - 1) {
+      current++;
+      render();
+    } else {
+      window.location.href = 'collage.html';
+    }
+  });
+
+  render();
+</script></main><footer class="relative z-10 w-full text-center pt-3 pb-[calc(14px+env(safe-area-inset-bottom))] font-label-sm text-[10px] uppercase tracking-[0.28em] text-secondary/50 select-none">An Evening, Just For Two</footer>
 </body></html>

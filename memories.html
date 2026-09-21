@@ -42,8 +42,6 @@
 
 .polaroid-paper {
   background-color: var(--color-paper-raised);
-  background-image: radial-gradient(var(--color-paper-sunken) 0.75px, transparent 0.75px);
-  background-size: 10px 10px;
   box-shadow: 0 16px 36px -8px rgba(36, 51, 31, 0.16), 0 4px 12px rgba(0, 0, 0, 0.05);
 }
 
@@ -68,7 +66,7 @@
     transition-duration: 0.01ms !important;
   }
 }
-</style></head><body class="bg-surface text-on-surface font-body-md text-body-md flex flex-col min-h-screen relative selection:bg-secondary-fixed selection:text-on-secondary-fixed"><header class="fixed top-0 inset-x-0 z-50 bg-surface/85 backdrop-blur-xl shadow-[0_1px_8px_rgba(0,0,0,0.03)] pt-safe"><div class="h-20 px-gutter-mobile flex items-center justify-between gap-space-sm"><div class="flex items-center gap-space-sm min-w-0"><img alt="Botanika Tasting Menu Emblem" class="h-8 w-auto object-contain shrink-0" src="assets/img/logo.svg"><div class="flex flex-col truncate"><span class="font-label-sm text-label-sm uppercase text-secondary tracking-widest">Botanika</span><span class="font-headline-sm text-headline-sm text-primary tracking-tight truncate">Memories</span></div></div><div class="flex items-center gap-space-sm shrink-0"><div class="flex flex-col items-end pointer-events-none select-none"><span class="font-label-sm text-[10px] uppercase tracking-widest text-secondary font-semibold">2 of 5</span><div class="flex items-center gap-1.5 mt-1.5"><span class="w-1.5 h-1.5 rounded-full bg-primary/40"></span><span class="w-2 h-2 rounded-full bg-tertiary-container ring-2 ring-tertiary-container/30"></span><span class="w-1.5 h-1.5 rounded-full bg-outline-variant/60"></span><span class="w-1.5 h-1.5 rounded-full bg-outline-variant/60"></span><span class="w-1.5 h-1.5 rounded-full bg-outline-variant/60"></span></div></div><img alt="Profile" class="w-8 h-8 rounded-full object-cover shadow-[0_2px_6px_rgba(58,74,52,0.18)]" src="assets/img/avatar.svg"></div></div></header><main class="flex-1 flex flex-col relative w-full px-gutter-mobile pt-20 bg-surface pb-8"><div class="animate-forward-entrance flex flex-col w-full max-w-md mx-auto relative px-2 py-4">
+</style></head><body class="bg-surface text-on-surface font-body-md text-body-md flex flex-col min-h-screen relative selection:bg-secondary-fixed selection:text-on-secondary-fixed"><main class="flex-1 flex flex-col relative w-full px-gutter-mobile pt-[calc(28px+env(safe-area-inset-top))] bg-surface pb-8"><div class="animate-forward-entrance flex flex-col w-full max-w-md mx-auto relative px-2 py-4">
 <div class="text-center mt-2 mb-4">
 <h1 class="font-headline-lg-mobile text-[32px] leading-tight text-primary tracking-tight mb-1.5">
     Amuse-Bouche of Memories
@@ -124,67 +122,18 @@
 <circle cx="34" cy="14" fill="var(--color-foil)" fill-opacity="0.25" r="2.5"></circle>
 </svg>
 </div>
-<!-- Card 3 (Bottom Stack) -->
-<div class="polaroid-paper absolute w-[86%] transition-all duration-500 transform rotate-[-4deg] translate-y-4 scale-95 rounded-lg p-3 pb-4 cursor-pointer z-10" id="card-3">
-<div class="relative w-full aspect-square bg-surface-container-high rounded overflow-hidden mb-2.5">
-<img alt="Coffee moment" class="w-full h-full object-cover" src="assets/img/memory-3.svg">
-<!-- Translucent Tape -->
-<div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-14 h-4 bg-amber-100/70 border-t border-b border-amber-200/50 backdrop-blur-sm shadow-sm rotate-[-2deg]"></div>
-</div>
-<div class="text-center pt-1 pb-1">
-<p class="font-headline-sm text-base text-primary/90 font-medium tracking-tight">
-        November 18 • Rainy Café
-      </p>
-</div>
-</div>
-<!-- Card 2 (Middle Stack) -->
-<div class="polaroid-paper absolute w-[86%] transition-all duration-500 transform rotate-[3deg] translate-y-2 scale-[0.98] rounded-lg p-3 pb-4 cursor-pointer z-20" id="card-2">
-<div class="relative w-full aspect-square bg-surface-container-high rounded overflow-hidden mb-2.5">
-<img alt="Coastal gelato memory" class="w-full h-full object-cover" src="assets/img/memory-2.svg">
-<!-- Translucent Tape -->
-<div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-14 h-4 bg-amber-100/70 border-t border-b border-amber-200/50 backdrop-blur-sm shadow-sm rotate-[1.5deg]"></div>
-</div>
-<div class="text-center pt-1 pb-1">
-<p class="font-headline-sm text-base text-primary/90 font-medium tracking-tight">
-        August 29 • Seaside Pier
-      </p>
-</div>
-</div>
-<!-- Card 1 (Top Active Polaroid) -->
-<div class="polaroid-paper absolute w-[86%] transition-all duration-500 transform rotate-[-1deg] translate-y-0 scale-100 rounded-lg p-3.5 pb-4 cursor-grab active:cursor-grabbing z-30" id="card-1">
-<div class="relative w-full aspect-square bg-surface-container-high rounded overflow-hidden mb-2.5">
-<img alt="Romantic birthday celebration rooftop portrait" class="w-full h-full object-cover" src="assets/img/memory-1.svg">
-<!-- Botanical corner filigree watermark on photo -->
-<div class="absolute bottom-2 right-2 pointer-events-none opacity-40">
-<svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" stroke-width="1.5" viewBox="0 0 24 24">
-<path d="M3 21C8 20 13 16 16 11C19 6 21 3 21 3C21 3 18 5 13 8C8 11 4 16 3 21Z"></path>
-</svg>
-</div>
-<!-- Vintage Wax Seal Motif at top -->
-<div class="absolute -top-2 left-1/2 -translate-x-1/2 flex items-center justify-center">
-<div class="w-8 h-8 rounded-full bg-tertiary-container shadow-[0_2px_6px_rgba(116,50,27,0.45)] border border-tertiary/40 flex items-center justify-center rotate-[6deg]">
-<span class="material-symbols-outlined text-[16px] text-tertiary-fixed font-light">local_florist</span>
-</div>
-</div>
-</div>
-<!-- Simplified Polaroid Caption -->
-<div class="text-center pt-1 pb-0.5">
-<p class="font-headline-sm text-[17px] leading-snug text-primary font-medium tracking-tight">
-        July 14 • Golden Hour
-      </p>
-</div>
-</div>
+<!-- Polaroid deck, built from PHOTOS in the script below -->
+<!-- Full-size layer: the cards are absolute with no offsets, so they take
+     their position from this flex centring - a shrink-wrapped wrapper would
+     park them at its own zero-width corner and let them run off-screen. -->
+<div class="absolute inset-0 z-10 flex items-center justify-center" id="card-deck"></div>
 </div>
 <!-- Dots Navigation -->
 <div class="flex items-center justify-center gap-2 mb-4">
 <button aria-label="Previous card" class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary active:scale-95 transition-all" id="prev-btn">
 <span class="material-symbols-outlined text-[16px]">west</span>
 </button>
-<div class="flex items-center gap-1.5 px-3 py-1 rounded-full bg-surface-container-high">
-<span class="w-2 h-2 rounded-full bg-tertiary-container transition-all" id="indicator-1"></span>
-<span class="w-1.5 h-1.5 rounded-full bg-outline-variant transition-all" id="indicator-2"></span>
-<span class="w-1.5 h-1.5 rounded-full bg-outline-variant transition-all" id="indicator-3"></span>
-</div>
+<div class="flex items-center gap-1 px-3 py-1 rounded-full bg-surface-container-high" id="indicator-row"></div>
 <button aria-label="Next card" class="w-7 h-7 rounded-full bg-surface-container flex items-center justify-center text-on-surface-variant hover:text-primary active:scale-95 transition-all" id="next-btn">
 <span class="material-symbols-outlined text-[16px]">east</span>
 </button>
@@ -202,91 +151,160 @@
 </div>
 <!-- Simplified Forward Action Button -->
 <div class="w-full pt-1">
-<a class="forward-action-btn w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-primary text-on-primary shadow-md hover:bg-primary-container active:scale-[0.99] transition-all duration-300" href="trivia.html">
-<span class="font-headline-sm text-lg tracking-wide text-on-primary font-normal">Next Course</span>
+<a aria-disabled="true" class="forward-action-btn w-full flex items-center justify-center gap-2 py-3.5 px-6 rounded-xl bg-primary text-on-primary shadow-md hover:bg-primary-container active:scale-[0.99] transition-all duration-300 opacity-40 pointer-events-none" href="trivia.html" id="continueLink">
+<span class="font-headline-sm text-lg tracking-wide text-on-primary font-normal">Continue</span>
 <span class="material-symbols-outlined text-[18px] forward-icon transition-transform duration-300 ease-out">arrow_forward</span>
 </a>
+<p class="text-center font-label-sm text-[10px] uppercase tracking-widest text-secondary/70 mt-2" id="stackHint">The photos are turning themselves</p>
 </div>
 </div>
 <script>
   (function() {
-    let currentIndex = 0;
-    const cards = [
-      document.getElementById('card-1'),
-      document.getElementById('card-2'),
-      document.getElementById('card-3')
-    ];
-    const indicators = [
-      document.getElementById('indicator-1'),
-      document.getElementById('indicator-2'),
-      document.getElementById('indicator-3')
+    // The photos, in order. Drop a file into galeri/duo and add its path here.
+    const PHOTOS = [
+      'galeri/duo/WhatsApp Image 2026-09-21 at 03.29.21.jpeg',
+      'galeri/duo/WhatsApp Image 2026-09-21 at 03.32.20.jpeg',
+      'galeri/duo/WhatsApp Image 2026-09-21 at 03.34.43.jpeg',
+      'galeri/duo/WhatsApp Image 2026-09-21 at 03.36.03.jpeg',
+      'galeri/duo/WhatsApp Image 2026-09-21 at 03.37.02.jpeg',
+      'galeri/duo/WhatsApp Image 2026-09-21 at 03.38.38.jpeg',
+      'galeri/duo/WhatsApp Image 2026-09-21 at 03.39.25.jpeg',
+      'galeri/duo/WhatsApp Image 2026-09-21 at 03.39.55.jpeg',
+      'galeri/duo/WhatsApp Image 2026-09-21 at 03.40.29.jpeg',
+      'galeri/duo/WhatsApp Image 2026-09-21 at 03.41.13.jpeg'
     ];
 
+    const deck = document.getElementById('card-deck');
+    const indicatorRow = document.getElementById('indicator-row');
+
+    // Only the front three are visible; the rest wait behind the bottom card.
     const cardTransforms = [
-      { transform: 'rotate(-1deg) translateY(0px) scale(1)', zIndex: '30' },
-      { transform: 'rotate(3deg) translateY(8px) scale(0.98)', zIndex: '20' },
-      { transform: 'rotate(-4deg) translateY(16px) scale(0.95)', zIndex: '10' }
+      { transform: 'rotate(-1deg) translateY(0px) scale(1)', zIndex: '30', opacity: '1' },
+      { transform: 'rotate(3deg) translateY(8px) scale(0.98)', zIndex: '20', opacity: '1' },
+      { transform: 'rotate(-4deg) translateY(16px) scale(0.95)', zIndex: '10', opacity: '1' }
     ];
+    const BURIED = { transform: 'rotate(-4deg) translateY(16px) scale(0.95)', zIndex: '0', opacity: '0' };
+
+    // Filenames carry spaces, so every path is encoded before it reaches src.
+    deck.innerHTML = PHOTOS.map(function (src, i) {
+      // max-w keeps the 4:5 photo shorter than the 430px stack area on wide
+      // screens, where 86% of the container would grow past it and spill onto
+      // the quote and the button below.
+      return '<div class="polaroid-paper absolute w-[86%] max-w-[320px] transition-all duration-500 rounded-lg p-3.5 pb-3.5 cursor-pointer">'
+        + '<div class="relative w-full aspect-[4/5] bg-surface-container-high rounded overflow-hidden">'
+        + '<img alt="Memory ' + (i + 1) + '" class="w-full h-full object-cover" src="' + encodeURI(src) + '">'
+        + '<div class="absolute -top-1.5 left-1/2 -translate-x-1/2 w-14 h-4 bg-amber-100/70 border-t border-b border-amber-200/50 backdrop-blur-sm shadow-sm rotate-[-2deg]"></div>'
+        + '</div></div>';
+    }).join('');
+
+    indicatorRow.innerHTML = PHOTOS.map(function () {
+      return '<span class="w-1.5 h-1.5 rounded-full bg-outline-variant transition-all"></span>';
+    }).join('');
+
+    const cards = Array.prototype.slice.call(deck.children);
+    const indicators = Array.prototype.slice.call(indicatorRow.children);
+    const COUNT = cards.length;
+    let currentIndex = 0;
 
     function updateCards() {
-      cards.forEach((card, idx) => {
-        const offset = (idx - currentIndex + 3) % 3;
-        card.style.transform = cardTransforms[offset].transform;
-        card.style.zIndex = cardTransforms[offset].zIndex;
+      cards.forEach(function (card, idx) {
+        const offset = (idx - currentIndex + COUNT) % COUNT;
+        const look = cardTransforms[offset] || BURIED;
+        card.style.transform = look.transform;
+        card.style.zIndex = look.zIndex;
+        card.style.opacity = look.opacity;
       });
 
-      indicators.forEach((ind, idx) => {
-        if (idx === currentIndex) {
-          ind.className = 'w-2 h-2 rounded-full bg-tertiary-container transition-all';
-        } else {
-          ind.className = 'w-1.5 h-1.5 rounded-full bg-outline-variant transition-all';
-        }
+      indicators.forEach(function (ind, idx) {
+        ind.className = idx === currentIndex
+          ? 'w-2 h-2 rounded-full bg-tertiary-container transition-all'
+          : 'w-1.5 h-1.5 rounded-full bg-outline-variant transition-all';
       });
+    }
+
+    // The deck turns itself over; a guest who takes over pauses it.
+    const DWELL = 2600;      // time a photo sits on top before the next turn
+    const RESUME = 4000;     // quiet time after a manual turn before resuming
+    const UNLOCK_AFTER = Math.min(5, COUNT);  // photos seen before Continue opens
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const link = document.getElementById('continueLink');
+    const hint = document.getElementById('stackHint');
+    const seen = new Set([0]);
+    let autoTimer = null;
+    let resumeTimer = null;
+
+    function unlock() {
+      if (!link || !link.hasAttribute('aria-disabled')) return;
+      link.classList.remove('opacity-40', 'pointer-events-none');
+      link.removeAttribute('aria-disabled');
+      if (hint) hint.remove();
+    }
+
+    // Enough of the deck seen, by timer or by hand, opens the way forward.
+    function turn(delta) {
+      currentIndex = (currentIndex + delta + COUNT) % COUNT;
+      updateCards();
+      seen.add(currentIndex);
+      if (seen.size >= UNLOCK_AFTER) unlock();
+    }
+
+    function stopAuto() {
+      clearTimeout(autoTimer);
+      autoTimer = null;
+    }
+
+    function queueAuto() {
+      if (reduceMotion) return;
+      stopAuto();
+      autoTimer = setTimeout(function () {
+        turn(1);
+        queueAuto();
+      }, DWELL);
+    }
+
+    function pauseAuto() {
+      if (reduceMotion) return;
+      stopAuto();
+      clearTimeout(resumeTimer);
+      resumeTimer = setTimeout(queueAuto, RESUME);
+    }
+
+    function manualTurn(delta) {
+      pauseAuto();
+      turn(delta);
     }
 
     const nextBtn = document.getElementById('next-btn');
     const prevBtn = document.getElementById('prev-btn');
 
-    if (nextBtn) {
-      nextBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % 3;
-        updateCards();
-      });
-    }
+    if (nextBtn) nextBtn.addEventListener('click', function () { manualTurn(1); });
+    if (prevBtn) prevBtn.addEventListener('click', function () { manualTurn(-1); });
 
-    if (prevBtn) {
-      prevBtn.addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + 3) % 3;
-        updateCards();
-      });
-    }
-
-    cards.forEach((c) => {
-      if (c) {
-        c.addEventListener('click', () => {
-          currentIndex = (currentIndex + 1) % 3;
-          updateCards();
-        });
-      }
+    cards.forEach(function (c) {
+      c.addEventListener('click', function () { manualTurn(1); });
     });
 
     let startX = 0;
-    const container = document.querySelector('.relative.h-\\[430px\\]');
+    const container = deck.parentElement;
     if (container) {
-      container.addEventListener('touchstart', (e) => {
+      container.addEventListener('touchstart', function (e) {
         startX = e.changedTouches[0].screenX;
       }, { passive: true });
 
-      container.addEventListener('touchend', (e) => {
+      container.addEventListener('touchend', function (e) {
         const endX = e.changedTouches[0].screenX;
         if (startX - endX > 40) {
-          currentIndex = (currentIndex + 1) % 3;
-          updateCards();
+          manualTurn(1);
         } else if (endX - startX > 40) {
-          currentIndex = (currentIndex - 1 + 3) % 3;
-          updateCards();
+          manualTurn(-1);
         }
       }, { passive: true });
     }
+
+    updateCards();
+
+    // Reduced motion: nothing turns on its own, and the way forward is open.
+    if (reduceMotion) unlock();
+    else queueAuto();
   })();
-</script></main></body></html>
+</script></main><footer class="relative z-10 w-full text-center pt-3 pb-[calc(14px+env(safe-area-inset-bottom))] font-label-sm text-[10px] uppercase tracking-[0.28em] text-secondary/50 select-none">An Evening, Just For Two</footer></body></html>

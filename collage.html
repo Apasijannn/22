@@ -1,0 +1,192 @@
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" name="viewport"><title>A Table Reserved For You</title><link href="https://fonts.googleapis.com" rel="preconnect"><link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"><link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;1,400;1,600&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"><link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"><link href="assets/design-tokens.css" rel="stylesheet"><script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script><script src="assets/tailwind.tokens.js"></script><style>@layer base { html, body { width: 100vw; margin: 0; padding: 0; } body { overscroll-behavior: none; } .pb-safe { padding-bottom: env(safe-area-inset-bottom, 0px); } .pt-safe { padding-top: env(safe-area-inset-top, 0px); } main > :first-child { margin-top: 0 !important; } main > :last-child { margin-bottom: 0 !important; } } ::-webkit-scrollbar { display: none; }</style><style>
+    body {
+      min-height: max(884px, 100dvh);
+    }
+
+    /* Clean ivory paper ground - solid, no texture */
+    .bg-paper {
+      background-color: var(--color-paper-raised);
+    }
+
+    @keyframes forwardItemEnter {
+      0% {
+        opacity: 0;
+        transform: translateY(8px);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .head-1 {
+      animation: forwardItemEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.04s both;
+    }
+    .head-2 {
+      animation: forwardItemEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.12s both;
+    }
+    .head-3 {
+      animation: forwardItemEnter 0.5s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+    }
+
+    /* --- Scrapbook cards ---------------------------------------------------
+       Each card carries its settled tilt in --tilt, so the drop and the idle
+       sway can both animate around it without fighting each other. The sway
+       starts exactly where the drop ends, and being later in the shorthand it
+       takes over the transform from that point on. */
+    .memory-card {
+      transform: rotate(var(--tilt));
+      animation:
+        paperDrop 0.62s cubic-bezier(0.22, 1.2, 0.36, 1) var(--drop-delay) both,
+        paperSway var(--sway-duration) ease-in-out var(--sway-delay) infinite;
+    }
+
+    @keyframes paperDrop {
+      0% {
+        opacity: 0;
+        transform: translateY(-34px) rotate(calc(var(--tilt) * 2.4)) scale(0.94);
+      }
+      55% {
+        opacity: 1;
+        transform: translateY(5px) rotate(calc(var(--tilt) * 0.8)) scale(1.01);
+      }
+      78% {
+        transform: translateY(-3px) rotate(calc(var(--tilt) * 1.08)) scale(1);
+      }
+      100% {
+        opacity: 1;
+        transform: translateY(0) rotate(var(--tilt)) scale(1);
+      }
+    }
+
+    @keyframes paperSway {
+      0%, 100% {
+        transform: translateY(0) rotate(var(--tilt));
+      }
+      50% {
+        transform: translateY(-3px) rotate(calc(var(--tilt) + 0.9deg));
+      }
+    }
+
+    .cta-arrow {
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+    .cta-btn:hover .cta-arrow,
+    .cta-btn:active .cta-arrow {
+      transform: translateX(4px);
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      .head-1,
+      .head-2,
+      .head-3 {
+        animation: none !important;
+        transform: none !important;
+        opacity: 1 !important;
+      }
+      /* Cards land settled: keep the tilt, drop the drop and the sway. */
+      .memory-card {
+        animation: none !important;
+        opacity: 1 !important;
+        transform: rotate(var(--tilt)) !important;
+      }
+      .cta-arrow {
+        transition: none !important;
+        transform: none !important;
+      }
+    }
+  </style>
+</head><body class="bg-paper text-on-surface font-body-md text-body-md flex flex-col min-h-screen relative overflow-x-hidden selection:bg-secondary-fixed selection:text-on-secondary-fixed"><main class="flex-1 flex flex-col relative w-full px-gutter-mobile pt-[calc(30px+env(safe-area-inset-top))] pb-safe">
+<div class="flex-1 flex flex-col w-full max-w-xl mx-auto">
+<!-- Header -->
+<header class="text-center space-y-3">
+<span class="head-1 block font-label-sm text-[11px] tracking-[0.28em] uppercase text-secondary">Behind The Scenes</span>
+<h1 class="head-2 font-display-lg text-[30px] leading-[38px] sm:text-[34px] sm:leading-[42px] text-primary font-normal italic px-2">
+      A few silly moments along the way 📸
+    </h1>
+<!-- Thin gold arrow divider -->
+<div class="head-3 flex items-center justify-center gap-3 pt-1">
+<span class="h-[1px] w-16 bg-gradient-to-r from-transparent to-[var(--color-foil)]/70"></span>
+<svg class="w-4 h-4 text-[var(--color-foil)] shrink-0" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1.4" viewBox="0 0 24 24">
+<path d="M12 4 L12 19"></path>
+<path d="M6 13 L12 19 L18 13"></path>
+</svg>
+<span class="h-[1px] w-16 bg-gradient-to-l from-transparent to-[var(--color-foil)]/70"></span>
+</div>
+<p class="head-3 font-body-md text-sm sm:text-body-md text-secondary italic pt-0.5">
+      A quick glimpse back before the grand reveal...
+    </p>
+</header>
+<!-- Scrapbook Collage (loose, overlapping; built from memoryPhotos) -->
+<div class="w-full grid grid-cols-2 gap-x-3 gap-y-4 pt-7 pb-8" id="memory-collage"></div>
+<!-- Continue -->
+<div class="mt-auto pb-8">
+<button class="cta-btn w-full py-4 px-6 rounded-xl bg-tertiary-container text-on-primary hover:bg-tertiary shadow-md hover:shadow-lg transition-all duration-200 flex items-center justify-center gap-2.5 cursor-pointer group" id="continue-btn" type="button">
+<span class="font-label-lg text-label-lg tracking-[0.12em] uppercase font-semibold">Continue to Reveal</span>
+<span class="material-symbols-outlined cta-arrow text-[20px]">arrow_forward</span>
+</button>
+</div>
+</div>
+<script>
+  // The photos, in order. Drop a file into galeri/lucu and add its path here.
+  var memoryPhotos = [
+    'galeri/lucu/WhatsApp Image 2026-09-20 at 11.18.07.jpeg',
+    'galeri/lucu/WhatsApp Image 2026-09-20 at 11.20.17.jpeg',
+    'galeri/lucu/WhatsApp Image 2026-09-21 at 03.30.12.jpeg',
+    'galeri/lucu/WhatsApp Image 2026-09-21 at 03.31.00.jpeg',
+    'galeri/lucu/WhatsApp Image 2026-09-21 at 03.33.59.jpeg',
+    'galeri/lucu/WhatsApp Image 2026-09-21 at 03.35.38.jpeg',
+    'galeri/lucu/WhatsApp Image 2026-09-21 at 03.38.06.jpeg',
+    'galeri/lucu/WhatsApp Image 2026-09-21 at 03.38.58.jpeg',
+    'galeri/lucu/WhatsApp Image 2026-09-21 at 03.53.27.jpeg',
+    'galeri/lucu/WhatsApp Image 2026-09-21 at 03.55.45.jpeg'
+  ];
+
+  // Per-card scrapbook placement: tilt, overlap, stacking and photo shape.
+  // Four looks, cycled down the grid, so no two neighbours sit the same way.
+  // Sway durations differ so the cards never breathe in unison.
+  var LAYOUT = [
+    { tilt: '-3.5deg', shape: 'aspect-[4/5]', offset: 'mt-0 z-20', tape: 'bg-[var(--primitive-color-sage-100)]/80 -left-1 -rotate-6', sway: '6.4s' },
+    { tilt: '2.8deg', shape: 'aspect-[4/5]', offset: 'mt-8 -ml-2 z-30', tape: 'bg-[var(--color-foil-bright)]/45 -right-1 rotate-6', sway: '7.2s' },
+    { tilt: '2.2deg', shape: 'aspect-[4/4]', offset: '-mt-4 z-10', tape: 'bg-[var(--color-tertiary-fixed)]/60 left-4 rotate-3', sway: '6.8s' },
+    { tilt: '-2.6deg', shape: 'aspect-[4/5]', offset: '-mt-7 -ml-1 z-20', tape: 'bg-[var(--primitive-color-linen-500)]/60 right-3 -rotate-4', sway: '7.6s' }
+  ];
+
+  function buildCollage() {
+    var grid = document.getElementById('memory-collage');
+    var html = '';
+
+    for (var i = 0; i < memoryPhotos.length; i++) {
+      var look = LAYOUT[i % LAYOUT.length];
+      // The drop cascades, but only over the first few - a long list would
+      // otherwise keep the last cards waiting seconds before they appear.
+      var dropDelay = (0.12 + Math.min(i, 5) * 0.14).toFixed(2) + 's';
+      var swayDelay = (0.12 + Math.min(i, 5) * 0.14 + 0.62).toFixed(2) + 's';
+
+      html += '<figure class="memory-card ' + look.offset + ' relative bg-[var(--color-paper-raised)] '
+        + 'rounded-[3px] shadow-lg border border-[var(--color-paper-edge)] p-2" '
+        + 'style="--tilt:' + look.tilt + ';--drop-delay:' + dropDelay + ';--sway-delay:' + swayDelay
+        + ';--sway-duration:' + look.sway + '">'
+
+        // washi tape
+        + '<span aria-hidden="true" class="absolute -top-2 ' + look.tape
+        + ' w-11 h-4 rounded-[1px] shadow-sm"></span>'
+
+        // photo window - filenames carry spaces, so the path is encoded
+        + '<div class="w-full ' + look.shape + ' bg-[var(--primitive-color-linen-300)] overflow-hidden">'
+        + '<img alt="Silly moment ' + (i + 1) + '" class="w-full h-full object-cover" '
+        + 'src="' + encodeURI(memoryPhotos[i]) + '">'
+        + '</div></figure>';
+    }
+
+    grid.innerHTML = html;
+  }
+
+  document.getElementById('continue-btn').addEventListener('click', function() {
+    window.location.href = 'reveal.html';
+  });
+
+  buildCollage();
+</script></main><footer class="relative z-10 w-full text-center pt-3 pb-[calc(14px+env(safe-area-inset-bottom))] font-label-sm text-[10px] uppercase tracking-[0.28em] text-secondary/50 select-none">An Evening, Just For Two</footer>
+</body></html>
